@@ -27,4 +27,3 @@ clean :
 depend:
 	makedepend -- $(CFLAGS) -- $(SRCS)
 # DO NOT DELETE
-

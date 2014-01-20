@@ -1,4 +1,4 @@
-Terminals which are not used
+Terminals unused in grammar
 
    PACKED
    RESOURCE
@@ -133,9 +133,9 @@ Grammar
    90            | type_qualifier IDENTIFIER SEMICOLON
    91            | type_qualifier IDENTIFIER identifier_list SEMICOLON
 
-   92 @1: /* empty */
+   92 $@1: /* empty */
 
-   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE @1 struct_declaration_list RIGHT_BRACE
+   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE $@1 struct_declaration_list RIGHT_BRACE
 
    94 identifier_list: COMMA IDENTIFIER
    95                | identifier_list COMMA IDENTIFIER
@@ -360,13 +360,13 @@ Grammar
   290                    | MEDIUM_PRECISION
   291                    | LOW_PRECISION
 
-  292 @2: /* empty */
+  292 $@2: /* empty */
 
-  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE @2 struct_declaration_list RIGHT_BRACE
+  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE $@2 struct_declaration_list RIGHT_BRACE
 
-  294 @3: /* empty */
+  294 $@3: /* empty */
 
-  295 struct_specifier: STRUCT LEFT_BRACE @3 struct_declaration_list RIGHT_BRACE
+  295 struct_specifier: STRUCT LEFT_BRACE $@3 struct_declaration_list RIGHT_BRACE
 
   296 struct_declaration_list: struct_declaration
   297                        | struct_declaration_list struct_declaration
@@ -402,20 +402,20 @@ Grammar
 
   319 compound_statement: LEFT_BRACE RIGHT_BRACE
 
-  320 @4: /* empty */
+  320 $@4: /* empty */
 
-  321 @5: /* empty */
+  321 $@5: /* empty */
 
-  322 compound_statement: LEFT_BRACE @4 statement_list @5 RIGHT_BRACE
+  322 compound_statement: LEFT_BRACE $@4 statement_list $@5 RIGHT_BRACE
 
   323 statement_no_new_scope: compound_statement_no_new_scope
   324                       | simple_statement
 
   325 statement_scoped: compound_statement
 
-  326 @6: /* empty */
+  326 $@6: /* empty */
 
-  327 statement_scoped: @6 simple_statement
+  327 statement_scoped: $@6 simple_statement
 
   328 compound_statement_no_new_scope: LEFT_BRACE RIGHT_BRACE
   329                                | LEFT_BRACE statement_list RIGHT_BRACE
@@ -434,9 +434,9 @@ Grammar
   337 condition: expression
   338          | fully_specified_type IDENTIFIER EQUAL initializer
 
-  339 @7: /* empty */
+  339 $@7: /* empty */
 
-  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN @7 LEFT_BRACE switch_statement_list RIGHT_BRACE
+  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN $@7 LEFT_BRACE switch_statement_list RIGHT_BRACE
 
   341 switch_statement_list: /* empty */
   342                      | statement_list
@@ -444,17 +444,17 @@ Grammar
   343 case_label: CASE expression COLON
   344           | DEFAULT COLON
 
-  345 @8: /* empty */
+  345 $@8: /* empty */
 
-  346 iteration_statement: WHILE LEFT_PAREN @8 condition RIGHT_PAREN statement_no_new_scope
+  346 iteration_statement: WHILE LEFT_PAREN $@8 condition RIGHT_PAREN statement_no_new_scope
 
-  347 @9: /* empty */
+  347 $@9: /* empty */
 
-  348 iteration_statement: DO @9 statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
+  348 iteration_statement: DO $@9 statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
 
-  349 @10: /* empty */
+  349 $@10: /* empty */
 
-  350 iteration_statement: FOR LEFT_PAREN @10 for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
+  350 iteration_statement: FOR LEFT_PAREN $@10 for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
 
   351 for_init_statement: expression_statement
   352                   | declaration_statement
@@ -477,9 +477,9 @@ Grammar
   364 external_declaration: function_definition
   365                     | declaration
 
-  366 @11: /* empty */
+  366 $@11: /* empty */
 
-  367 function_definition: function_prototype @11 compound_statement_no_new_scope
+  367 function_definition: function_prototype $@11 compound_statement_no_new_scope
 
 
 Terminals, with rules where they appear
@@ -774,7 +774,7 @@ declaration (250)
     on left: 83 84 85 86 87 88 89 90 91, on right: 309 365
 block_structure (251)
     on left: 93, on right: 86 87 88
-@1 (252)
+$@1 (252)
     on left: 92, on right: 93
 identifier_list (253)
     on left: 94 95, on right: 91 95
@@ -832,15 +832,15 @@ type_specifier_nonarray (276)
     229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244
     245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260
     261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276
-    277 278 279 280 281 282 283 284 285 286 287 288,
-    on right: 161 162
+    277 278 279 280 281 282 283 284 285 286 287 288, on right: 161
+    162
 precision_qualifier (277)
     on left: 289 290 291, on right: 85 136
 struct_specifier (278)
     on left: 293 295, on right: 287
-@2 (279)
+$@2 (279)
     on left: 292, on right: 293
-@3 (280)
+$@3 (280)
     on left: 294, on right: 295
 struct_declaration_list (281)
     on left: 296 297, on right: 93 293 295 297
@@ -862,15 +862,15 @@ simple_statement (289)
     on left: 312 313 314 315 316 317 318, on right: 311 324 327
 compound_statement (290)
     on left: 319 322, on right: 310 325
-@4 (291)
+$@4 (291)
     on left: 320, on right: 322
-@5 (292)
+$@5 (292)
     on left: 321, on right: 322
 statement_no_new_scope (293)
     on left: 323 324, on right: 346 350
 statement_scoped (294)
     on left: 325 327, on right: 335 336
-@6 (295)
+$@6 (295)
     on left: 326, on right: 327
 compound_statement_no_new_scope (296)
     on left: 328 329, on right: 323 367
@@ -886,7 +886,7 @@ condition (301)
     on left: 337 338, on right: 346 353
 switch_statement (302)
     on left: 340, on right: 315
-@7 (303)
+$@7 (303)
     on left: 339, on right: 340
 switch_statement_list (304)
     on left: 341 342, on right: 340
@@ -894,11 +894,11 @@ case_label (305)
     on left: 343 344, on right: 316
 iteration_statement (306)
     on left: 346 348 350, on right: 317
-@8 (307)
+$@8 (307)
     on left: 345, on right: 346
-@9 (308)
+$@9 (308)
     on left: 347, on right: 348
-@10 (309)
+$@10 (309)
     on left: 349, on right: 350
 for_init_statement (310)
     on left: 351 352, on right: 350
@@ -914,11 +914,11 @@ external_declaration (315)
     on left: 364 365, on right: 362 363
 function_definition (316)
     on left: 367, on right: 364
-@11 (317)
+$@11 (317)
     on left: 366, on right: 367
 
 
-state 0
+State 0
 
     0 $accept: . translation_unit $end
 
@@ -1098,63 +1098,63 @@ state 0
     function_definition              go to state 173
 
 
-state 1
+State 1
 
   141 storage_qualifier: ATTRIBUTE .
 
     $default  reduce using rule 141 (storage_qualifier)
 
 
-state 2
+State 2
 
   142 storage_qualifier: VARYING .
 
     $default  reduce using rule 142 (storage_qualifier)
 
 
-state 3
+State 3
 
   140 storage_qualifier: CONST .
 
     $default  reduce using rule 140 (storage_qualifier)
 
 
-state 4
+State 4
 
   172 type_specifier_nonarray: BOOL .
 
     $default  reduce using rule 172 (type_specifier_nonarray)
 
 
-state 5
+State 5
 
   168 type_specifier_nonarray: FLOAT .
 
     $default  reduce using rule 168 (type_specifier_nonarray)
 
 
-state 6
+State 6
 
   169 type_specifier_nonarray: DOUBLE .
 
     $default  reduce using rule 169 (type_specifier_nonarray)
 
 
-state 7
+State 7
 
   170 type_specifier_nonarray: INT .
 
     $default  reduce using rule 170 (type_specifier_nonarray)
 
 
-state 8
+State 8
 
   171 type_specifier_nonarray: UINT .
 
     $default  reduce using rule 171 (type_specifier_nonarray)
 
 
-state 9
+State 9
 
   157 storage_qualifier: SUBROUTINE .
   158                  | SUBROUTINE . LEFT_PAREN type_name_list RIGHT_PAREN
@@ -1164,989 +1164,989 @@ state 9
     $default  reduce using rule 157 (storage_qualifier)
 
 
-state 10
+State 10
 
   179 type_specifier_nonarray: BVEC2 .
 
     $default  reduce using rule 179 (type_specifier_nonarray)
 
 
-state 11
+State 11
 
   180 type_specifier_nonarray: BVEC3 .
 
     $default  reduce using rule 180 (type_specifier_nonarray)
 
 
-state 12
+State 12
 
   181 type_specifier_nonarray: BVEC4 .
 
     $default  reduce using rule 181 (type_specifier_nonarray)
 
 
-state 13
+State 13
 
   182 type_specifier_nonarray: IVEC2 .
 
     $default  reduce using rule 182 (type_specifier_nonarray)
 
 
-state 14
+State 14
 
   183 type_specifier_nonarray: IVEC3 .
 
     $default  reduce using rule 183 (type_specifier_nonarray)
 
 
-state 15
+State 15
 
   184 type_specifier_nonarray: IVEC4 .
 
     $default  reduce using rule 184 (type_specifier_nonarray)
 
 
-state 16
+State 16
 
   185 type_specifier_nonarray: UVEC2 .
 
     $default  reduce using rule 185 (type_specifier_nonarray)
 
 
-state 17
+State 17
 
   186 type_specifier_nonarray: UVEC3 .
 
     $default  reduce using rule 186 (type_specifier_nonarray)
 
 
-state 18
+State 18
 
   187 type_specifier_nonarray: UVEC4 .
 
     $default  reduce using rule 187 (type_specifier_nonarray)
 
 
-state 19
+State 19
 
   173 type_specifier_nonarray: VEC2 .
 
     $default  reduce using rule 173 (type_specifier_nonarray)
 
 
-state 20
+State 20
 
   174 type_specifier_nonarray: VEC3 .
 
     $default  reduce using rule 174 (type_specifier_nonarray)
 
 
-state 21
+State 21
 
   175 type_specifier_nonarray: VEC4 .
 
     $default  reduce using rule 175 (type_specifier_nonarray)
 
 
-state 22
+State 22
 
   188 type_specifier_nonarray: MAT2 .
 
     $default  reduce using rule 188 (type_specifier_nonarray)
 
 
-state 23
+State 23
 
   189 type_specifier_nonarray: MAT3 .
 
     $default  reduce using rule 189 (type_specifier_nonarray)
 
 
-state 24
+State 24
 
   190 type_specifier_nonarray: MAT4 .
 
     $default  reduce using rule 190 (type_specifier_nonarray)
 
 
-state 25
+State 25
 
   146 storage_qualifier: CENTROID .
 
     $default  reduce using rule 146 (storage_qualifier)
 
 
-state 26
+State 26
 
   144 storage_qualifier: IN .
 
     $default  reduce using rule 144 (storage_qualifier)
 
 
-state 27
+State 27
 
   145 storage_qualifier: OUT .
 
     $default  reduce using rule 145 (storage_qualifier)
 
 
-state 28
+State 28
 
   143 storage_qualifier: INOUT .
 
     $default  reduce using rule 143 (storage_qualifier)
 
 
-state 29
+State 29
 
   149 storage_qualifier: UNIFORM .
 
     $default  reduce using rule 149 (storage_qualifier)
 
 
-state 30
+State 30
 
   147 storage_qualifier: PATCH .
 
     $default  reduce using rule 147 (storage_qualifier)
 
 
-state 31
+State 31
 
   148 storage_qualifier: SAMPLE .
 
     $default  reduce using rule 148 (storage_qualifier)
 
 
-state 32
+State 32
 
   150 storage_qualifier: BUFFER .
 
     $default  reduce using rule 150 (storage_qualifier)
 
 
-state 33
+State 33
 
   151 storage_qualifier: SHARED .
 
     $default  reduce using rule 151 (storage_qualifier)
 
 
-state 34
+State 34
 
   152 storage_qualifier: COHERENT .
 
     $default  reduce using rule 152 (storage_qualifier)
 
 
-state 35
+State 35
 
   153 storage_qualifier: VOLATILE .
 
     $default  reduce using rule 153 (storage_qualifier)
 
 
-state 36
+State 36
 
   154 storage_qualifier: RESTRICT .
 
     $default  reduce using rule 154 (storage_qualifier)
 
 
-state 37
+State 37
 
   155 storage_qualifier: READONLY .
 
     $default  reduce using rule 155 (storage_qualifier)
 
 
-state 38
+State 38
 
   156 storage_qualifier: WRITEONLY .
 
     $default  reduce using rule 156 (storage_qualifier)
 
 
-state 39
+State 39
 
   176 type_specifier_nonarray: DVEC2 .
 
     $default  reduce using rule 176 (type_specifier_nonarray)
 
 
-state 40
+State 40
 
   177 type_specifier_nonarray: DVEC3 .
 
     $default  reduce using rule 177 (type_specifier_nonarray)
 
 
-state 41
+State 41
 
   178 type_specifier_nonarray: DVEC4 .
 
     $default  reduce using rule 178 (type_specifier_nonarray)
 
 
-state 42
+State 42
 
   200 type_specifier_nonarray: DMAT2 .
 
     $default  reduce using rule 200 (type_specifier_nonarray)
 
 
-state 43
+State 43
 
   201 type_specifier_nonarray: DMAT3 .
 
     $default  reduce using rule 201 (type_specifier_nonarray)
 
 
-state 44
+State 44
 
   202 type_specifier_nonarray: DMAT4 .
 
     $default  reduce using rule 202 (type_specifier_nonarray)
 
 
-state 45
+State 45
 
   124 interpolation_qualifier: NOPERSPECTIVE .
 
     $default  reduce using rule 124 (interpolation_qualifier)
 
 
-state 46
+State 46
 
   123 interpolation_qualifier: FLAT .
 
     $default  reduce using rule 123 (interpolation_qualifier)
 
 
-state 47
+State 47
 
   122 interpolation_qualifier: SMOOTH .
 
     $default  reduce using rule 122 (interpolation_qualifier)
 
 
-state 48
+State 48
 
   125 layout_qualifier: LAYOUT . LEFT_PAREN layout_qualifier_id_list RIGHT_PAREN
 
     LEFT_PAREN  shift, and go to state 175
 
 
-state 49
+State 49
 
   191 type_specifier_nonarray: MAT2X2 .
 
     $default  reduce using rule 191 (type_specifier_nonarray)
 
 
-state 50
+State 50
 
   192 type_specifier_nonarray: MAT2X3 .
 
     $default  reduce using rule 192 (type_specifier_nonarray)
 
 
-state 51
+State 51
 
   193 type_specifier_nonarray: MAT2X4 .
 
     $default  reduce using rule 193 (type_specifier_nonarray)
 
 
-state 52
+State 52
 
   194 type_specifier_nonarray: MAT3X2 .
 
     $default  reduce using rule 194 (type_specifier_nonarray)
 
 
-state 53
+State 53
 
   195 type_specifier_nonarray: MAT3X3 .
 
     $default  reduce using rule 195 (type_specifier_nonarray)
 
 
-state 54
+State 54
 
   196 type_specifier_nonarray: MAT3X4 .
 
     $default  reduce using rule 196 (type_specifier_nonarray)
 
 
-state 55
+State 55
 
   197 type_specifier_nonarray: MAT4X2 .
 
     $default  reduce using rule 197 (type_specifier_nonarray)
 
 
-state 56
+State 56
 
   198 type_specifier_nonarray: MAT4X3 .
 
     $default  reduce using rule 198 (type_specifier_nonarray)
 
 
-state 57
+State 57
 
   199 type_specifier_nonarray: MAT4X4 .
 
     $default  reduce using rule 199 (type_specifier_nonarray)
 
 
-state 58
+State 58
 
   203 type_specifier_nonarray: DMAT2X2 .
 
     $default  reduce using rule 203 (type_specifier_nonarray)
 
 
-state 59
+State 59
 
   204 type_specifier_nonarray: DMAT2X3 .
 
     $default  reduce using rule 204 (type_specifier_nonarray)
 
 
-state 60
+State 60
 
   205 type_specifier_nonarray: DMAT2X4 .
 
     $default  reduce using rule 205 (type_specifier_nonarray)
 
 
-state 61
+State 61
 
   206 type_specifier_nonarray: DMAT3X2 .
 
     $default  reduce using rule 206 (type_specifier_nonarray)
 
 
-state 62
+State 62
 
   207 type_specifier_nonarray: DMAT3X3 .
 
     $default  reduce using rule 207 (type_specifier_nonarray)
 
 
-state 63
+State 63
 
   208 type_specifier_nonarray: DMAT3X4 .
 
     $default  reduce using rule 208 (type_specifier_nonarray)
 
 
-state 64
+State 64
 
   209 type_specifier_nonarray: DMAT4X2 .
 
     $default  reduce using rule 209 (type_specifier_nonarray)
 
 
-state 65
+State 65
 
   210 type_specifier_nonarray: DMAT4X3 .
 
     $default  reduce using rule 210 (type_specifier_nonarray)
 
 
-state 66
+State 66
 
   211 type_specifier_nonarray: DMAT4X4 .
 
     $default  reduce using rule 211 (type_specifier_nonarray)
 
 
-state 67
+State 67
 
   212 type_specifier_nonarray: ATOMIC_UINT .
 
     $default  reduce using rule 212 (type_specifier_nonarray)
 
 
-state 68
+State 68
 
   213 type_specifier_nonarray: SAMPLER1D .
 
     $default  reduce using rule 213 (type_specifier_nonarray)
 
 
-state 69
+State 69
 
   214 type_specifier_nonarray: SAMPLER2D .
 
     $default  reduce using rule 214 (type_specifier_nonarray)
 
 
-state 70
+State 70
 
   215 type_specifier_nonarray: SAMPLER3D .
 
     $default  reduce using rule 215 (type_specifier_nonarray)
 
 
-state 71
+State 71
 
   216 type_specifier_nonarray: SAMPLERCUBE .
 
     $default  reduce using rule 216 (type_specifier_nonarray)
 
 
-state 72
+State 72
 
   217 type_specifier_nonarray: SAMPLER1DSHADOW .
 
     $default  reduce using rule 217 (type_specifier_nonarray)
 
 
-state 73
+State 73
 
   218 type_specifier_nonarray: SAMPLER2DSHADOW .
 
     $default  reduce using rule 218 (type_specifier_nonarray)
 
 
-state 74
+State 74
 
   219 type_specifier_nonarray: SAMPLERCUBESHADOW .
 
     $default  reduce using rule 219 (type_specifier_nonarray)
 
 
-state 75
+State 75
 
   220 type_specifier_nonarray: SAMPLER1DARRAY .
 
     $default  reduce using rule 220 (type_specifier_nonarray)
 
 
-state 76
+State 76
 
   221 type_specifier_nonarray: SAMPLER2DARRAY .
 
     $default  reduce using rule 221 (type_specifier_nonarray)
 
 
-state 77
+State 77
 
   222 type_specifier_nonarray: SAMPLER1DARRAYSHADOW .
 
     $default  reduce using rule 222 (type_specifier_nonarray)
 
 
-state 78
+State 78
 
   223 type_specifier_nonarray: SAMPLER2DARRAYSHADOW .
 
     $default  reduce using rule 223 (type_specifier_nonarray)
 
 
-state 79
+State 79
 
   226 type_specifier_nonarray: ISAMPLER1D .
 
     $default  reduce using rule 226 (type_specifier_nonarray)
 
 
-state 80
+State 80
 
   227 type_specifier_nonarray: ISAMPLER2D .
 
     $default  reduce using rule 227 (type_specifier_nonarray)
 
 
-state 81
+State 81
 
   228 type_specifier_nonarray: ISAMPLER3D .
 
     $default  reduce using rule 228 (type_specifier_nonarray)
 
 
-state 82
+State 82
 
   229 type_specifier_nonarray: ISAMPLERCUBE .
 
     $default  reduce using rule 229 (type_specifier_nonarray)
 
 
-state 83
+State 83
 
   230 type_specifier_nonarray: ISAMPLER1DARRAY .
 
     $default  reduce using rule 230 (type_specifier_nonarray)
 
 
-state 84
+State 84
 
   231 type_specifier_nonarray: ISAMPLER2DARRAY .
 
     $default  reduce using rule 231 (type_specifier_nonarray)
 
 
-state 85
+State 85
 
   233 type_specifier_nonarray: USAMPLER1D .
 
     $default  reduce using rule 233 (type_specifier_nonarray)
 
 
-state 86
+State 86
 
   234 type_specifier_nonarray: USAMPLER2D .
 
     $default  reduce using rule 234 (type_specifier_nonarray)
 
 
-state 87
+State 87
 
   235 type_specifier_nonarray: USAMPLER3D .
 
     $default  reduce using rule 235 (type_specifier_nonarray)
 
 
-state 88
+State 88
 
   236 type_specifier_nonarray: USAMPLERCUBE .
 
     $default  reduce using rule 236 (type_specifier_nonarray)
 
 
-state 89
+State 89
 
   237 type_specifier_nonarray: USAMPLER1DARRAY .
 
     $default  reduce using rule 237 (type_specifier_nonarray)
 
 
-state 90
+State 90
 
   238 type_specifier_nonarray: USAMPLER2DARRAY .
 
     $default  reduce using rule 238 (type_specifier_nonarray)
 
 
-state 91
+State 91
 
   240 type_specifier_nonarray: SAMPLER2DRECT .
 
     $default  reduce using rule 240 (type_specifier_nonarray)
 
 
-state 92
+State 92
 
   241 type_specifier_nonarray: SAMPLER2DRECTSHADOW .
 
     $default  reduce using rule 241 (type_specifier_nonarray)
 
 
-state 93
+State 93
 
   242 type_specifier_nonarray: ISAMPLER2DRECT .
 
     $default  reduce using rule 242 (type_specifier_nonarray)
 
 
-state 94
+State 94
 
   243 type_specifier_nonarray: USAMPLER2DRECT .
 
     $default  reduce using rule 243 (type_specifier_nonarray)
 
 
-state 95
+State 95
 
   244 type_specifier_nonarray: SAMPLERBUFFER .
 
     $default  reduce using rule 244 (type_specifier_nonarray)
 
 
-state 96
+State 96
 
   245 type_specifier_nonarray: ISAMPLERBUFFER .
 
     $default  reduce using rule 245 (type_specifier_nonarray)
 
 
-state 97
+State 97
 
   246 type_specifier_nonarray: USAMPLERBUFFER .
 
     $default  reduce using rule 246 (type_specifier_nonarray)
 
 
-state 98
+State 98
 
   224 type_specifier_nonarray: SAMPLERCUBEARRAY .
 
     $default  reduce using rule 224 (type_specifier_nonarray)
 
 
-state 99
+State 99
 
   225 type_specifier_nonarray: SAMPLERCUBEARRAYSHADOW .
 
     $default  reduce using rule 225 (type_specifier_nonarray)
 
 
-state 100
+State 100
 
   232 type_specifier_nonarray: ISAMPLERCUBEARRAY .
 
     $default  reduce using rule 232 (type_specifier_nonarray)
 
 
-state 101
+State 101
 
   239 type_specifier_nonarray: USAMPLERCUBEARRAY .
 
     $default  reduce using rule 239 (type_specifier_nonarray)
 
 
-state 102
+State 102
 
   247 type_specifier_nonarray: SAMPLER2DMS .
 
     $default  reduce using rule 247 (type_specifier_nonarray)
 
 
-state 103
+State 103
 
   248 type_specifier_nonarray: ISAMPLER2DMS .
 
     $default  reduce using rule 248 (type_specifier_nonarray)
 
 
-state 104
+State 104
 
   249 type_specifier_nonarray: USAMPLER2DMS .
 
     $default  reduce using rule 249 (type_specifier_nonarray)
 
 
-state 105
+State 105
 
   250 type_specifier_nonarray: SAMPLER2DMSARRAY .
 
     $default  reduce using rule 250 (type_specifier_nonarray)
 
 
-state 106
+State 106
 
   251 type_specifier_nonarray: ISAMPLER2DMSARRAY .
 
     $default  reduce using rule 251 (type_specifier_nonarray)
 
 
-state 107
+State 107
 
   252 type_specifier_nonarray: USAMPLER2DMSARRAY .
 
     $default  reduce using rule 252 (type_specifier_nonarray)
 
 
-state 108
+State 108
 
   286 type_specifier_nonarray: SAMPLEREXTERNALOES .
 
     $default  reduce using rule 286 (type_specifier_nonarray)
 
 
-state 109
+State 109
 
   253 type_specifier_nonarray: IMAGE1D .
 
     $default  reduce using rule 253 (type_specifier_nonarray)
 
 
-state 110
+State 110
 
   254 type_specifier_nonarray: IIMAGE1D .
 
     $default  reduce using rule 254 (type_specifier_nonarray)
 
 
-state 111
+State 111
 
   255 type_specifier_nonarray: UIMAGE1D .
 
     $default  reduce using rule 255 (type_specifier_nonarray)
 
 
-state 112
+State 112
 
   256 type_specifier_nonarray: IMAGE2D .
 
     $default  reduce using rule 256 (type_specifier_nonarray)
 
 
-state 113
+State 113
 
   257 type_specifier_nonarray: IIMAGE2D .
 
     $default  reduce using rule 257 (type_specifier_nonarray)
 
 
-state 114
+State 114
 
   258 type_specifier_nonarray: UIMAGE2D .
 
     $default  reduce using rule 258 (type_specifier_nonarray)
 
 
-state 115
+State 115
 
   259 type_specifier_nonarray: IMAGE3D .
 
     $default  reduce using rule 259 (type_specifier_nonarray)
 
 
-state 116
+State 116
 
   260 type_specifier_nonarray: IIMAGE3D .
 
     $default  reduce using rule 260 (type_specifier_nonarray)
 
 
-state 117
+State 117
 
   261 type_specifier_nonarray: UIMAGE3D .
 
     $default  reduce using rule 261 (type_specifier_nonarray)
 
 
-state 118
+State 118
 
   262 type_specifier_nonarray: IMAGE2DRECT .
 
     $default  reduce using rule 262 (type_specifier_nonarray)
 
 
-state 119
+State 119
 
   263 type_specifier_nonarray: IIMAGE2DRECT .
 
     $default  reduce using rule 263 (type_specifier_nonarray)
 
 
-state 120
+State 120
 
   264 type_specifier_nonarray: UIMAGE2DRECT .
 
     $default  reduce using rule 264 (type_specifier_nonarray)
 
 
-state 121
+State 121
 
   265 type_specifier_nonarray: IMAGECUBE .
 
     $default  reduce using rule 265 (type_specifier_nonarray)
 
 
-state 122
+State 122
 
   266 type_specifier_nonarray: IIMAGECUBE .
 
     $default  reduce using rule 266 (type_specifier_nonarray)
 
 
-state 123
+State 123
 
   267 type_specifier_nonarray: UIMAGECUBE .
 
     $default  reduce using rule 267 (type_specifier_nonarray)
 
 
-state 124
+State 124
 
   268 type_specifier_nonarray: IMAGEBUFFER .
 
     $default  reduce using rule 268 (type_specifier_nonarray)
 
 
-state 125
+State 125
 
   269 type_specifier_nonarray: IIMAGEBUFFER .
 
     $default  reduce using rule 269 (type_specifier_nonarray)
 
 
-state 126
+State 126
 
   270 type_specifier_nonarray: UIMAGEBUFFER .
 
     $default  reduce using rule 270 (type_specifier_nonarray)
 
 
-state 127
+State 127
 
   271 type_specifier_nonarray: IMAGE1DARRAY .
 
     $default  reduce using rule 271 (type_specifier_nonarray)
 
 
-state 128
+State 128
 
   272 type_specifier_nonarray: IIMAGE1DARRAY .
 
     $default  reduce using rule 272 (type_specifier_nonarray)
 
 
-state 129
+State 129
 
   273 type_specifier_nonarray: UIMAGE1DARRAY .
 
     $default  reduce using rule 273 (type_specifier_nonarray)
 
 
-state 130
+State 130
 
   274 type_specifier_nonarray: IMAGE2DARRAY .
 
     $default  reduce using rule 274 (type_specifier_nonarray)
 
 
-state 131
+State 131
 
   275 type_specifier_nonarray: IIMAGE2DARRAY .
 
     $default  reduce using rule 275 (type_specifier_nonarray)
 
 
-state 132
+State 132
 
   276 type_specifier_nonarray: UIMAGE2DARRAY .
 
     $default  reduce using rule 276 (type_specifier_nonarray)
 
 
-state 133
+State 133
 
   277 type_specifier_nonarray: IMAGECUBEARRAY .
 
     $default  reduce using rule 277 (type_specifier_nonarray)
 
 
-state 134
+State 134
 
   278 type_specifier_nonarray: IIMAGECUBEARRAY .
 
     $default  reduce using rule 278 (type_specifier_nonarray)
 
 
-state 135
+State 135
 
   279 type_specifier_nonarray: UIMAGECUBEARRAY .
 
     $default  reduce using rule 279 (type_specifier_nonarray)
 
 
-state 136
+State 136
 
   280 type_specifier_nonarray: IMAGE2DMS .
 
     $default  reduce using rule 280 (type_specifier_nonarray)
 
 
-state 137
+State 137
 
   281 type_specifier_nonarray: IIMAGE2DMS .
 
     $default  reduce using rule 281 (type_specifier_nonarray)
 
 
-state 138
+State 138
 
   282 type_specifier_nonarray: UIMAGE2DMS .
 
     $default  reduce using rule 282 (type_specifier_nonarray)
 
 
-state 139
+State 139
 
   283 type_specifier_nonarray: IMAGE2DMSARRAY .
 
     $default  reduce using rule 283 (type_specifier_nonarray)
 
 
-state 140
+State 140
 
   284 type_specifier_nonarray: IIMAGE2DMSARRAY .
 
     $default  reduce using rule 284 (type_specifier_nonarray)
 
 
-state 141
+State 141
 
   285 type_specifier_nonarray: UIMAGE2DMSARRAY .
 
     $default  reduce using rule 285 (type_specifier_nonarray)
 
 
-state 142
+State 142
 
-  293 struct_specifier: STRUCT . IDENTIFIER LEFT_BRACE @2 struct_declaration_list RIGHT_BRACE
-  295                 | STRUCT . LEFT_BRACE @3 struct_declaration_list RIGHT_BRACE
+  293 struct_specifier: STRUCT . IDENTIFIER LEFT_BRACE $@2 struct_declaration_list RIGHT_BRACE
+  295                 | STRUCT . LEFT_BRACE $@3 struct_declaration_list RIGHT_BRACE
 
     IDENTIFIER  shift, and go to state 176
     LEFT_BRACE  shift, and go to state 177
 
 
-state 143
+State 143
 
   167 type_specifier_nonarray: VOID .
 
     $default  reduce using rule 167 (type_specifier_nonarray)
 
 
-state 144
+State 144
 
   288 type_specifier_nonarray: TYPE_NAME .
 
     $default  reduce using rule 288 (type_specifier_nonarray)
 
 
-state 145
+State 145
 
   121 invariant_qualifier: INVARIANT .
 
     $default  reduce using rule 121 (invariant_qualifier)
 
 
-state 146
+State 146
 
   131 precise_qualifier: PRECISE .
 
     $default  reduce using rule 131 (precise_qualifier)
 
 
-state 147
+State 147
 
   289 precision_qualifier: HIGH_PRECISION .
 
     $default  reduce using rule 289 (precision_qualifier)
 
 
-state 148
+State 148
 
   290 precision_qualifier: MEDIUM_PRECISION .
 
     $default  reduce using rule 290 (precision_qualifier)
 
 
-state 149
+State 149
 
   291 precision_qualifier: LOW_PRECISION .
 
     $default  reduce using rule 291 (precision_qualifier)
 
 
-state 150
+State 150
 
    85 declaration: PRECISION . precision_qualifier type_specifier SEMICOLON
 
@@ -2157,14 +2157,14 @@ state 150
     precision_qualifier  go to state 178
 
 
-state 151
+State 151
 
   365 external_declaration: declaration .
 
     $default  reduce using rule 365 (external_declaration)
 
 
-state 152
+State 152
 
    86 declaration: block_structure . SEMICOLON
    87            | block_structure . IDENTIFIER SEMICOLON
@@ -2174,26 +2174,26 @@ state 152
     SEMICOLON   shift, and go to state 180
 
 
-state 153
+State 153
 
    83 declaration: function_prototype . SEMICOLON
-  367 function_definition: function_prototype . @11 compound_statement_no_new_scope
+  367 function_definition: function_prototype . $@11 compound_statement_no_new_scope
 
     SEMICOLON  shift, and go to state 181
 
-    $default  reduce using rule 366 (@11)
+    $default  reduce using rule 366 ($@11)
 
-    @11  go to state 182
+    $@11  go to state 182
 
 
-state 154
+State 154
 
    96 function_prototype: function_declarator . RIGHT_PAREN
 
     RIGHT_PAREN  shift, and go to state 183
 
 
-state 155
+State 155
 
    98 function_declarator: function_header_with_parameters .
   100 function_header_with_parameters: function_header_with_parameters . COMMA parameter_declaration
@@ -2203,7 +2203,7 @@ state 155
     $default  reduce using rule 98 (function_declarator)
 
 
-state 156
+State 156
 
    97 function_declarator: function_header .
    99 function_header_with_parameters: function_header . parameter_declaration
@@ -2376,7 +2376,7 @@ state 156
     struct_specifier          go to state 170
 
 
-state 157
+State 157
 
    84 declaration: init_declarator_list . SEMICOLON
   110 init_declarator_list: init_declarator_list . COMMA IDENTIFIER
@@ -2388,14 +2388,14 @@ state 157
     SEMICOLON  shift, and go to state 191
 
 
-state 158
+State 158
 
   109 init_declarator_list: single_declaration .
 
     $default  reduce using rule 109 (init_declarator_list)
 
 
-state 159
+State 159
 
   101 function_header: fully_specified_type . IDENTIFIER LEFT_PAREN
   114 single_declaration: fully_specified_type .
@@ -2409,40 +2409,40 @@ state 159
     $default  reduce using rule 114 (single_declaration)
 
 
-state 160
+State 160
 
   138 single_type_qualifier: invariant_qualifier .
 
     $default  reduce using rule 138 (single_type_qualifier)
 
 
-state 161
+State 161
 
   137 single_type_qualifier: interpolation_qualifier .
 
     $default  reduce using rule 137 (single_type_qualifier)
 
 
-state 162
+State 162
 
   135 single_type_qualifier: layout_qualifier .
 
     $default  reduce using rule 135 (single_type_qualifier)
 
 
-state 163
+State 163
 
   139 single_type_qualifier: precise_qualifier .
 
     $default  reduce using rule 139 (single_type_qualifier)
 
 
-state 164
+State 164
 
    89 declaration: type_qualifier . SEMICOLON
    90            | type_qualifier . IDENTIFIER SEMICOLON
    91            | type_qualifier . IDENTIFIER identifier_list SEMICOLON
-   93 block_structure: type_qualifier . IDENTIFIER LEFT_BRACE @1 struct_declaration_list RIGHT_BRACE
+   93 block_structure: type_qualifier . IDENTIFIER LEFT_BRACE $@1 struct_declaration_list RIGHT_BRACE
   120 fully_specified_type: type_qualifier . type_specifier
   133 type_qualifier: type_qualifier . single_type_qualifier
 
@@ -2610,28 +2610,28 @@ state 164
     struct_specifier         go to state 170
 
 
-state 165
+State 165
 
   132 type_qualifier: single_type_qualifier .
 
     $default  reduce using rule 132 (type_qualifier)
 
 
-state 166
+State 166
 
   134 single_type_qualifier: storage_qualifier .
 
     $default  reduce using rule 134 (single_type_qualifier)
 
 
-state 167
+State 167
 
   119 fully_specified_type: type_specifier .
 
     $default  reduce using rule 119 (fully_specified_type)
 
 
-state 168
+State 168
 
   161 type_specifier: type_specifier_nonarray .
   162               | type_specifier_nonarray . array_specifier
@@ -2643,21 +2643,21 @@ state 168
     array_specifier  go to state 198
 
 
-state 169
+State 169
 
   136 single_type_qualifier: precision_qualifier .
 
     $default  reduce using rule 136 (single_type_qualifier)
 
 
-state 170
+State 170
 
   287 type_specifier_nonarray: struct_specifier .
 
     $default  reduce using rule 287 (type_specifier_nonarray)
 
 
-state 171
+State 171
 
     0 $accept: translation_unit . $end
   363 translation_unit: translation_unit . external_declaration
@@ -2838,21 +2838,21 @@ state 171
     function_definition              go to state 173
 
 
-state 172
+State 172
 
   362 translation_unit: external_declaration .
 
     $default  reduce using rule 362 (translation_unit)
 
 
-state 173
+State 173
 
   364 external_declaration: function_definition .
 
     $default  reduce using rule 364 (external_declaration)
 
 
-state 174
+State 174
 
   158 storage_qualifier: SUBROUTINE LEFT_PAREN . type_name_list RIGHT_PAREN
 
@@ -2861,7 +2861,7 @@ state 174
     type_name_list  go to state 202
 
 
-state 175
+State 175
 
   125 layout_qualifier: LAYOUT LEFT_PAREN . layout_qualifier_id_list RIGHT_PAREN
 
@@ -2872,23 +2872,23 @@ state 175
     layout_qualifier_id       go to state 206
 
 
-state 176
+State 176
 
-  293 struct_specifier: STRUCT IDENTIFIER . LEFT_BRACE @2 struct_declaration_list RIGHT_BRACE
+  293 struct_specifier: STRUCT IDENTIFIER . LEFT_BRACE $@2 struct_declaration_list RIGHT_BRACE
 
     LEFT_BRACE  shift, and go to state 207
 
 
-state 177
+State 177
 
-  295 struct_specifier: STRUCT LEFT_BRACE . @3 struct_declaration_list RIGHT_BRACE
+  295 struct_specifier: STRUCT LEFT_BRACE . $@3 struct_declaration_list RIGHT_BRACE
 
-    $default  reduce using rule 294 (@3)
+    $default  reduce using rule 294 ($@3)
 
-    @3  go to state 208
+    $@3  go to state 208
 
 
-state 178
+State 178
 
    85 declaration: PRECISION precision_qualifier . type_specifier SEMICOLON
 
@@ -3020,7 +3020,7 @@ state 178
     struct_specifier         go to state 170
 
 
-state 179
+State 179
 
    87 declaration: block_structure IDENTIFIER . SEMICOLON
    88            | block_structure IDENTIFIER . array_specifier SEMICOLON
@@ -3031,37 +3031,37 @@ state 179
     array_specifier  go to state 211
 
 
-state 180
+State 180
 
    86 declaration: block_structure SEMICOLON .
 
     $default  reduce using rule 86 (declaration)
 
 
-state 181
+State 181
 
    83 declaration: function_prototype SEMICOLON .
 
     $default  reduce using rule 83 (declaration)
 
 
-state 182
+State 182
 
-  367 function_definition: function_prototype @11 . compound_statement_no_new_scope
+  367 function_definition: function_prototype $@11 . compound_statement_no_new_scope
 
     LEFT_BRACE  shift, and go to state 212
 
     compound_statement_no_new_scope  go to state 213
 
 
-state 183
+State 183
 
    96 function_prototype: function_declarator RIGHT_PAREN .
 
     $default  reduce using rule 96 (function_prototype)
 
 
-state 184
+State 184
 
   100 function_header_with_parameters: function_header_with_parameters COMMA . parameter_declaration
 
@@ -3231,28 +3231,28 @@ state 184
     struct_specifier          go to state 170
 
 
-state 185
+State 185
 
   105 parameter_declaration: parameter_declarator .
 
     $default  reduce using rule 105 (parameter_declaration)
 
 
-state 186
+State 186
 
    99 function_header_with_parameters: function_header parameter_declaration .
 
     $default  reduce using rule 99 (function_header_with_parameters)
 
 
-state 187
+State 187
 
   107 parameter_declaration: parameter_type_specifier .
 
     $default  reduce using rule 107 (parameter_declaration)
 
 
-state 188
+State 188
 
   104 parameter_declaration: type_qualifier . parameter_declarator
   106                      | type_qualifier . parameter_type_specifier
@@ -3422,7 +3422,7 @@ state 188
     struct_specifier          go to state 170
 
 
-state 189
+State 189
 
   102 parameter_declarator: type_specifier . IDENTIFIER
   103                     | type_specifier . IDENTIFIER array_specifier
@@ -3433,7 +3433,7 @@ state 189
     $default  reduce using rule 108 (parameter_type_specifier)
 
 
-state 190
+State 190
 
   110 init_declarator_list: init_declarator_list COMMA . IDENTIFIER
   111                     | init_declarator_list COMMA . IDENTIFIER array_specifier
@@ -3443,14 +3443,14 @@ state 190
     IDENTIFIER  shift, and go to state 218
 
 
-state 191
+State 191
 
    84 declaration: init_declarator_list SEMICOLON .
 
     $default  reduce using rule 84 (declaration)
 
 
-state 192
+State 192
 
   101 function_header: fully_specified_type IDENTIFIER . LEFT_PAREN
   115 single_declaration: fully_specified_type IDENTIFIER .
@@ -3467,11 +3467,11 @@ state 192
     array_specifier  go to state 221
 
 
-state 193
+State 193
 
    90 declaration: type_qualifier IDENTIFIER . SEMICOLON
    91            | type_qualifier IDENTIFIER . identifier_list SEMICOLON
-   93 block_structure: type_qualifier IDENTIFIER . LEFT_BRACE @1 struct_declaration_list RIGHT_BRACE
+   93 block_structure: type_qualifier IDENTIFIER . LEFT_BRACE $@1 struct_declaration_list RIGHT_BRACE
 
     LEFT_BRACE  shift, and go to state 222
     COMMA       shift, and go to state 223
@@ -3480,28 +3480,28 @@ state 193
     identifier_list  go to state 225
 
 
-state 194
+State 194
 
    89 declaration: type_qualifier SEMICOLON .
 
     $default  reduce using rule 89 (declaration)
 
 
-state 195
+State 195
 
   133 type_qualifier: type_qualifier single_type_qualifier .
 
     $default  reduce using rule 133 (type_qualifier)
 
 
-state 196
+State 196
 
   120 fully_specified_type: type_qualifier type_specifier .
 
     $default  reduce using rule 120 (fully_specified_type)
 
 
-state 197
+State 197
 
   163 array_specifier: LEFT_BRACKET . RIGHT_BRACKET
   164                | LEFT_BRACKET . constant_expression RIGHT_BRACKET
@@ -3673,7 +3673,7 @@ state 197
     struct_specifier                      go to state 170
 
 
-state 198
+State 198
 
   162 type_specifier: type_specifier_nonarray array_specifier .
   165 array_specifier: array_specifier . LEFT_BRACKET RIGHT_BRACKET
@@ -3684,28 +3684,28 @@ state 198
     $default  reduce using rule 162 (type_specifier)
 
 
-state 199
+State 199
 
     0 $accept: translation_unit $end .
 
     $default  accept
 
 
-state 200
+State 200
 
   363 translation_unit: translation_unit external_declaration .
 
     $default  reduce using rule 363 (translation_unit)
 
 
-state 201
+State 201
 
   159 type_name_list: TYPE_NAME .
 
     $default  reduce using rule 159 (type_name_list)
 
 
-state 202
+State 202
 
   158 storage_qualifier: SUBROUTINE LEFT_PAREN type_name_list . RIGHT_PAREN
   160 type_name_list: type_name_list . COMMA TYPE_NAME
@@ -3714,14 +3714,14 @@ state 202
     COMMA        shift, and go to state 268
 
 
-state 203
+State 203
 
   130 layout_qualifier_id: SHARED .
 
     $default  reduce using rule 130 (layout_qualifier_id)
 
 
-state 204
+State 204
 
   128 layout_qualifier_id: IDENTIFIER .
   129                    | IDENTIFIER . EQUAL constant_expression
@@ -3731,7 +3731,7 @@ state 204
     $default  reduce using rule 128 (layout_qualifier_id)
 
 
-state 205
+State 205
 
   125 layout_qualifier: LAYOUT LEFT_PAREN layout_qualifier_id_list . RIGHT_PAREN
   127 layout_qualifier_id_list: layout_qualifier_id_list . COMMA layout_qualifier_id
@@ -3740,25 +3740,25 @@ state 205
     COMMA        shift, and go to state 271
 
 
-state 206
+State 206
 
   126 layout_qualifier_id_list: layout_qualifier_id .
 
     $default  reduce using rule 126 (layout_qualifier_id_list)
 
 
-state 207
+State 207
 
-  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE . @2 struct_declaration_list RIGHT_BRACE
+  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE . $@2 struct_declaration_list RIGHT_BRACE
 
-    $default  reduce using rule 292 (@2)
+    $default  reduce using rule 292 ($@2)
 
-    @2  go to state 272
+    $@2  go to state 272
 
 
-state 208
+State 208
 
-  295 struct_specifier: STRUCT LEFT_BRACE @3 . struct_declaration_list RIGHT_BRACE
+  295 struct_specifier: STRUCT LEFT_BRACE $@3 . struct_declaration_list RIGHT_BRACE
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -3925,21 +3925,21 @@ state 208
     struct_declaration       go to state 276
 
 
-state 209
+State 209
 
    85 declaration: PRECISION precision_qualifier type_specifier . SEMICOLON
 
     SEMICOLON  shift, and go to state 277
 
 
-state 210
+State 210
 
    87 declaration: block_structure IDENTIFIER SEMICOLON .
 
     $default  reduce using rule 87 (declaration)
 
 
-state 211
+State 211
 
    88 declaration: block_structure IDENTIFIER array_specifier . SEMICOLON
   165 array_specifier: array_specifier . LEFT_BRACKET RIGHT_BRACKET
@@ -3949,7 +3949,7 @@ state 211
     SEMICOLON     shift, and go to state 278
 
 
-state 212
+State 212
 
   328 compound_statement_no_new_scope: LEFT_BRACE . RIGHT_BRACE
   329                                | LEFT_BRACE . statement_list RIGHT_BRACE
@@ -4191,35 +4191,35 @@ state 212
     jump_statement                        go to state 310
 
 
-state 213
+State 213
 
-  367 function_definition: function_prototype @11 compound_statement_no_new_scope .
+  367 function_definition: function_prototype $@11 compound_statement_no_new_scope .
 
     $default  reduce using rule 367 (function_definition)
 
 
-state 214
+State 214
 
   100 function_header_with_parameters: function_header_with_parameters COMMA parameter_declaration .
 
     $default  reduce using rule 100 (function_header_with_parameters)
 
 
-state 215
+State 215
 
   104 parameter_declaration: type_qualifier parameter_declarator .
 
     $default  reduce using rule 104 (parameter_declaration)
 
 
-state 216
+State 216
 
   106 parameter_declaration: type_qualifier parameter_type_specifier .
 
     $default  reduce using rule 106 (parameter_declaration)
 
 
-state 217
+State 217
 
   102 parameter_declarator: type_specifier IDENTIFIER .
   103                     | type_specifier IDENTIFIER . array_specifier
@@ -4231,7 +4231,7 @@ state 217
     array_specifier  go to state 311
 
 
-state 218
+State 218
 
   110 init_declarator_list: init_declarator_list COMMA IDENTIFIER .
   111                     | init_declarator_list COMMA IDENTIFIER . array_specifier
@@ -4246,14 +4246,14 @@ state 218
     array_specifier  go to state 313
 
 
-state 219
+State 219
 
   101 function_header: fully_specified_type IDENTIFIER LEFT_PAREN .
 
     $default  reduce using rule 101 (function_header)
 
 
-state 220
+State 220
 
   118 single_declaration: fully_specified_type IDENTIFIER EQUAL . initializer
 
@@ -4425,7 +4425,7 @@ state 220
     initializer                           go to state 316
 
 
-state 221
+State 221
 
   116 single_declaration: fully_specified_type IDENTIFIER array_specifier .
   117                   | fully_specified_type IDENTIFIER array_specifier . EQUAL initializer
@@ -4438,30 +4438,30 @@ state 221
     $default  reduce using rule 116 (single_declaration)
 
 
-state 222
+State 222
 
-   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE . @1 struct_declaration_list RIGHT_BRACE
+   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE . $@1 struct_declaration_list RIGHT_BRACE
 
-    $default  reduce using rule 92 (@1)
+    $default  reduce using rule 92 ($@1)
 
-    @1  go to state 318
+    $@1  go to state 318
 
 
-state 223
+State 223
 
    94 identifier_list: COMMA . IDENTIFIER
 
     IDENTIFIER  shift, and go to state 319
 
 
-state 224
+State 224
 
    90 declaration: type_qualifier IDENTIFIER SEMICOLON .
 
     $default  reduce using rule 90 (declaration)
 
 
-state 225
+State 225
 
    91 declaration: type_qualifier IDENTIFIER identifier_list . SEMICOLON
    95 identifier_list: identifier_list . COMMA IDENTIFIER
@@ -4470,49 +4470,49 @@ state 225
     SEMICOLON  shift, and go to state 321
 
 
-state 226
+State 226
 
     1 variable_identifier: IDENTIFIER .
 
     $default  reduce using rule 1 (variable_identifier)
 
 
-state 227
+State 227
 
     5 primary_expression: FLOATCONSTANT .
 
     $default  reduce using rule 5 (primary_expression)
 
 
-state 228
+State 228
 
     6 primary_expression: DOUBLECONSTANT .
 
     $default  reduce using rule 6 (primary_expression)
 
 
-state 229
+State 229
 
     3 primary_expression: INTCONSTANT .
 
     $default  reduce using rule 3 (primary_expression)
 
 
-state 230
+State 230
 
     4 primary_expression: UINTCONSTANT .
 
     $default  reduce using rule 4 (primary_expression)
 
 
-state 231
+State 231
 
     7 primary_expression: BOOLCONSTANT .
 
     $default  reduce using rule 7 (primary_expression)
 
 
-state 232
+State 232
 
    28 unary_expression: INC_OP . unary_expression
 
@@ -4669,7 +4669,7 @@ state 232
     struct_specifier                      go to state 170
 
 
-state 233
+State 233
 
    29 unary_expression: DEC_OP . unary_expression
 
@@ -4826,7 +4826,7 @@ state 233
     struct_specifier                      go to state 170
 
 
-state 234
+State 234
 
     8 primary_expression: LEFT_PAREN . expression RIGHT_PAREN
 
@@ -4997,56 +4997,56 @@ state 234
     struct_specifier                      go to state 170
 
 
-state 235
+State 235
 
   163 array_specifier: LEFT_BRACKET RIGHT_BRACKET .
 
     $default  reduce using rule 163 (array_specifier)
 
 
-state 236
+State 236
 
    33 unary_operator: BANG .
 
     $default  reduce using rule 33 (unary_operator)
 
 
-state 237
+State 237
 
    32 unary_operator: DASH .
 
     $default  reduce using rule 32 (unary_operator)
 
 
-state 238
+State 238
 
    34 unary_operator: TILDE .
 
     $default  reduce using rule 34 (unary_operator)
 
 
-state 239
+State 239
 
    31 unary_operator: PLUS .
 
     $default  reduce using rule 31 (unary_operator)
 
 
-state 240
+State 240
 
     2 primary_expression: variable_identifier .
 
     $default  reduce using rule 2 (primary_expression)
 
 
-state 241
+State 241
 
     9 postfix_expression: primary_expression .
 
     $default  reduce using rule 9 (postfix_expression)
 
 
-state 242
+State 242
 
    10 postfix_expression: postfix_expression . LEFT_BRACKET integer_expression RIGHT_BRACKET
    12                   | postfix_expression . DOT FIELD_SELECTION
@@ -5064,35 +5064,35 @@ state 242
     $default    reduce using rule 27 (unary_expression)
 
 
-state 243
+State 243
 
    11 postfix_expression: function_call .
 
     $default  reduce using rule 11 (postfix_expression)
 
 
-state 244
+State 244
 
    16 function_call: function_call_or_method .
 
     $default  reduce using rule 16 (function_call)
 
 
-state 245
+State 245
 
    17 function_call_or_method: function_call_generic .
 
     $default  reduce using rule 17 (function_call_or_method)
 
 
-state 246
+State 246
 
    19 function_call_generic: function_call_header_no_parameters . RIGHT_PAREN
 
     RIGHT_PAREN  shift, and go to state 329
 
 
-state 247
+State 247
 
    18 function_call_generic: function_call_header_with_parameters . RIGHT_PAREN
    23 function_call_header_with_parameters: function_call_header_with_parameters . COMMA assignment_expression
@@ -5101,7 +5101,7 @@ state 247
     COMMA        shift, and go to state 331
 
 
-state 248
+State 248
 
    20 function_call_header_no_parameters: function_call_header . VOID
    21                                   | function_call_header .
@@ -5275,21 +5275,21 @@ state 248
     struct_specifier                      go to state 170
 
 
-state 249
+State 249
 
    24 function_call_header: function_identifier . LEFT_PAREN
 
     LEFT_PAREN  shift, and go to state 334
 
 
-state 250
+State 250
 
    35 multiplicative_expression: unary_expression .
 
     $default  reduce using rule 35 (multiplicative_expression)
 
 
-state 251
+State 251
 
    30 unary_expression: unary_operator . unary_expression
 
@@ -5446,7 +5446,7 @@ state 251
     struct_specifier                      go to state 170
 
 
-state 252
+State 252
 
    36 multiplicative_expression: multiplicative_expression . STAR unary_expression
    37                          | multiplicative_expression . SLASH unary_expression
@@ -5460,7 +5460,7 @@ state 252
     $default  reduce using rule 39 (additive_expression)
 
 
-state 253
+State 253
 
    40 additive_expression: additive_expression . PLUS multiplicative_expression
    41                    | additive_expression . DASH multiplicative_expression
@@ -5472,7 +5472,7 @@ state 253
     $default  reduce using rule 42 (shift_expression)
 
 
-state 254
+State 254
 
    43 shift_expression: shift_expression . LEFT_OP additive_expression
    44                 | shift_expression . RIGHT_OP additive_expression
@@ -5484,7 +5484,7 @@ state 254
     $default  reduce using rule 45 (relational_expression)
 
 
-state 255
+State 255
 
    46 relational_expression: relational_expression . LEFT_ANGLE shift_expression
    47                      | relational_expression . RIGHT_ANGLE shift_expression
@@ -5500,7 +5500,7 @@ state 255
     $default  reduce using rule 50 (equality_expression)
 
 
-state 256
+State 256
 
    51 equality_expression: equality_expression . EQ_OP relational_expression
    52                    | equality_expression . NE_OP relational_expression
@@ -5512,7 +5512,7 @@ state 256
     $default  reduce using rule 53 (and_expression)
 
 
-state 257
+State 257
 
    54 and_expression: and_expression . AMPERSAND equality_expression
    55 exclusive_or_expression: and_expression .
@@ -5522,7 +5522,7 @@ state 257
     $default  reduce using rule 55 (exclusive_or_expression)
 
 
-state 258
+State 258
 
    56 exclusive_or_expression: exclusive_or_expression . CARET and_expression
    57 inclusive_or_expression: exclusive_or_expression .
@@ -5532,7 +5532,7 @@ state 258
     $default  reduce using rule 57 (inclusive_or_expression)
 
 
-state 259
+State 259
 
    58 inclusive_or_expression: inclusive_or_expression . VERTICAL_BAR exclusive_or_expression
    59 logical_and_expression: inclusive_or_expression .
@@ -5542,7 +5542,7 @@ state 259
     $default  reduce using rule 59 (logical_and_expression)
 
 
-state 260
+State 260
 
    60 logical_and_expression: logical_and_expression . AND_OP inclusive_or_expression
    61 logical_xor_expression: logical_and_expression .
@@ -5552,7 +5552,7 @@ state 260
     $default  reduce using rule 61 (logical_xor_expression)
 
 
-state 261
+State 261
 
    62 logical_xor_expression: logical_xor_expression . XOR_OP logical_and_expression
    63 logical_or_expression: logical_xor_expression .
@@ -5562,7 +5562,7 @@ state 261
     $default  reduce using rule 63 (logical_or_expression)
 
 
-state 262
+State 262
 
    64 logical_or_expression: logical_or_expression . OR_OP logical_xor_expression
    65 conditional_expression: logical_or_expression .
@@ -5574,28 +5574,28 @@ state 262
     $default  reduce using rule 65 (conditional_expression)
 
 
-state 263
+State 263
 
    82 constant_expression: conditional_expression .
 
     $default  reduce using rule 82 (constant_expression)
 
 
-state 264
+State 264
 
   164 array_specifier: LEFT_BRACKET constant_expression . RIGHT_BRACKET
 
     RIGHT_BRACKET  shift, and go to state 356
 
 
-state 265
+State 265
 
    25 function_identifier: type_specifier .
 
     $default  reduce using rule 25 (function_identifier)
 
 
-state 266
+State 266
 
   165 array_specifier: array_specifier LEFT_BRACKET . RIGHT_BRACKET
   166                | array_specifier LEFT_BRACKET . constant_expression RIGHT_BRACKET
@@ -5767,21 +5767,21 @@ state 266
     struct_specifier                      go to state 170
 
 
-state 267
+State 267
 
   158 storage_qualifier: SUBROUTINE LEFT_PAREN type_name_list RIGHT_PAREN .
 
     $default  reduce using rule 158 (storage_qualifier)
 
 
-state 268
+State 268
 
   160 type_name_list: type_name_list COMMA . TYPE_NAME
 
     TYPE_NAME  shift, and go to state 359
 
 
-state 269
+State 269
 
   129 layout_qualifier_id: IDENTIFIER EQUAL . constant_expression
 
@@ -5951,14 +5951,14 @@ state 269
     struct_specifier                      go to state 170
 
 
-state 270
+State 270
 
   125 layout_qualifier: LAYOUT LEFT_PAREN layout_qualifier_id_list RIGHT_PAREN .
 
     $default  reduce using rule 125 (layout_qualifier)
 
 
-state 271
+State 271
 
   127 layout_qualifier_id_list: layout_qualifier_id_list COMMA . layout_qualifier_id
 
@@ -5968,9 +5968,9 @@ state 271
     layout_qualifier_id  go to state 361
 
 
-state 272
+State 272
 
-  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE @2 . struct_declaration_list RIGHT_BRACE
+  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE $@2 . struct_declaration_list RIGHT_BRACE
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -6137,7 +6137,7 @@ state 272
     struct_declaration       go to state 276
 
 
-state 273
+State 273
 
   133 type_qualifier: type_qualifier . single_type_qualifier
   299 struct_declaration: type_qualifier . type_specifier struct_declarator_list SEMICOLON
@@ -6304,7 +6304,7 @@ state 273
     struct_specifier         go to state 170
 
 
-state 274
+State 274
 
   298 struct_declaration: type_specifier . struct_declarator_list SEMICOLON
 
@@ -6314,9 +6314,9 @@ state 274
     struct_declarator       go to state 366
 
 
-state 275
+State 275
 
-  295 struct_specifier: STRUCT LEFT_BRACE @3 struct_declaration_list . RIGHT_BRACE
+  295 struct_specifier: STRUCT LEFT_BRACE $@3 struct_declaration_list . RIGHT_BRACE
   297 struct_declaration_list: struct_declaration_list . struct_declaration
 
     ATTRIBUTE               shift, and go to state 1
@@ -6484,72 +6484,72 @@ state 275
     struct_declaration       go to state 368
 
 
-state 276
+State 276
 
   296 struct_declaration_list: struct_declaration .
 
     $default  reduce using rule 296 (struct_declaration_list)
 
 
-state 277
+State 277
 
    85 declaration: PRECISION precision_qualifier type_specifier SEMICOLON .
 
     $default  reduce using rule 85 (declaration)
 
 
-state 278
+State 278
 
    88 declaration: block_structure IDENTIFIER array_specifier SEMICOLON .
 
     $default  reduce using rule 88 (declaration)
 
 
-state 279
+State 279
 
   358 jump_statement: BREAK . SEMICOLON
 
     SEMICOLON  shift, and go to state 369
 
 
-state 280
+State 280
 
   357 jump_statement: CONTINUE . SEMICOLON
 
     SEMICOLON  shift, and go to state 370
 
 
-state 281
+State 281
 
-  348 iteration_statement: DO . @9 statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
+  348 iteration_statement: DO . $@9 statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
 
-    $default  reduce using rule 347 (@9)
+    $default  reduce using rule 347 ($@9)
 
-    @9  go to state 371
+    $@9  go to state 371
 
 
-state 282
+State 282
 
-  350 iteration_statement: FOR . LEFT_PAREN @10 for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
+  350 iteration_statement: FOR . LEFT_PAREN $@10 for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
 
     LEFT_PAREN  shift, and go to state 372
 
 
-state 283
+State 283
 
   334 selection_statement: IF . LEFT_PAREN expression RIGHT_PAREN selection_rest_statement
 
     LEFT_PAREN  shift, and go to state 373
 
 
-state 284
+State 284
 
   361 jump_statement: DISCARD . SEMICOLON
 
     SEMICOLON  shift, and go to state 374
 
 
-state 285
+State 285
 
   359 jump_statement: RETURN . SEMICOLON
   360               | RETURN . expression SEMICOLON
@@ -6722,14 +6722,14 @@ state 285
     struct_specifier                      go to state 170
 
 
-state 286
+State 286
 
-  340 switch_statement: SWITCH . LEFT_PAREN expression RIGHT_PAREN @7 LEFT_BRACE switch_statement_list RIGHT_BRACE
+  340 switch_statement: SWITCH . LEFT_PAREN expression RIGHT_PAREN $@7 LEFT_BRACE switch_statement_list RIGHT_BRACE
 
     LEFT_PAREN  shift, and go to state 377
 
 
-state 287
+State 287
 
   343 case_label: CASE . expression COLON
 
@@ -6900,47 +6900,47 @@ state 287
     struct_specifier                      go to state 170
 
 
-state 288
+State 288
 
   344 case_label: DEFAULT . COLON
 
     COLON  shift, and go to state 379
 
 
-state 289
+State 289
 
-  346 iteration_statement: WHILE . LEFT_PAREN @8 condition RIGHT_PAREN statement_no_new_scope
+  346 iteration_statement: WHILE . LEFT_PAREN $@8 condition RIGHT_PAREN statement_no_new_scope
 
     LEFT_PAREN  shift, and go to state 380
 
 
-state 290
+State 290
 
   319 compound_statement: LEFT_BRACE . RIGHT_BRACE
-  322                   | LEFT_BRACE . @4 statement_list @5 RIGHT_BRACE
+  322                   | LEFT_BRACE . $@4 statement_list $@5 RIGHT_BRACE
 
     RIGHT_BRACE  shift, and go to state 381
 
-    $default  reduce using rule 320 (@4)
+    $default  reduce using rule 320 ($@4)
 
-    @4  go to state 382
+    $@4  go to state 382
 
 
-state 291
+State 291
 
   328 compound_statement_no_new_scope: LEFT_BRACE RIGHT_BRACE .
 
     $default  reduce using rule 328 (compound_statement_no_new_scope)
 
 
-state 292
+State 292
 
   332 expression_statement: SEMICOLON .
 
     $default  reduce using rule 332 (expression_statement)
 
 
-state 293
+State 293
 
    35 multiplicative_expression: unary_expression .
    68 assignment_expression: unary_expression . assignment_operator assignment_expression
@@ -6962,21 +6962,21 @@ state 293
     assignment_operator  go to state 394
 
 
-state 294
+State 294
 
    67 assignment_expression: conditional_expression .
 
     $default  reduce using rule 67 (assignment_expression)
 
 
-state 295
+State 295
 
    80 expression: assignment_expression .
 
     $default  reduce using rule 80 (expression)
 
 
-state 296
+State 296
 
    81 expression: expression . COMMA assignment_expression
   333 expression_statement: expression . SEMICOLON
@@ -6985,21 +6985,21 @@ state 296
     SEMICOLON  shift, and go to state 396
 
 
-state 297
+State 297
 
   309 declaration_statement: declaration .
 
     $default  reduce using rule 309 (declaration_statement)
 
 
-state 298
+State 298
 
    83 declaration: function_prototype . SEMICOLON
 
     SEMICOLON  shift, and go to state 181
 
 
-state 299
+State 299
 
    25 function_identifier: type_specifier .
   119 fully_specified_type: type_specifier .
@@ -7008,35 +7008,35 @@ state 299
     $default    reduce using rule 119 (fully_specified_type)
 
 
-state 300
+State 300
 
   312 simple_statement: declaration_statement .
 
     $default  reduce using rule 312 (simple_statement)
 
 
-state 301
+State 301
 
   330 statement_list: statement .
 
     $default  reduce using rule 330 (statement_list)
 
 
-state 302
+State 302
 
   311 statement: simple_statement .
 
     $default  reduce using rule 311 (statement)
 
 
-state 303
+State 303
 
   310 statement: compound_statement .
 
     $default  reduce using rule 310 (statement)
 
 
-state 304
+State 304
 
   329 compound_statement_no_new_scope: LEFT_BRACE statement_list . RIGHT_BRACE
   331 statement_list: statement_list . statement
@@ -7277,49 +7277,49 @@ state 304
     jump_statement                        go to state 310
 
 
-state 305
+State 305
 
   313 simple_statement: expression_statement .
 
     $default  reduce using rule 313 (simple_statement)
 
 
-state 306
+State 306
 
   314 simple_statement: selection_statement .
 
     $default  reduce using rule 314 (simple_statement)
 
 
-state 307
+State 307
 
   315 simple_statement: switch_statement .
 
     $default  reduce using rule 315 (simple_statement)
 
 
-state 308
+State 308
 
   316 simple_statement: case_label .
 
     $default  reduce using rule 316 (simple_statement)
 
 
-state 309
+State 309
 
   317 simple_statement: iteration_statement .
 
     $default  reduce using rule 317 (simple_statement)
 
 
-state 310
+State 310
 
   318 simple_statement: jump_statement .
 
     $default  reduce using rule 318 (simple_statement)
 
 
-state 311
+State 311
 
   103 parameter_declarator: type_specifier IDENTIFIER array_specifier .
   165 array_specifier: array_specifier . LEFT_BRACKET RIGHT_BRACKET
@@ -7330,7 +7330,7 @@ state 311
     $default  reduce using rule 103 (parameter_declarator)
 
 
-state 312
+State 312
 
   113 init_declarator_list: init_declarator_list COMMA IDENTIFIER EQUAL . initializer
 
@@ -7502,7 +7502,7 @@ state 312
     initializer                           go to state 399
 
 
-state 313
+State 313
 
   111 init_declarator_list: init_declarator_list COMMA IDENTIFIER array_specifier .
   112                     | init_declarator_list COMMA IDENTIFIER array_specifier . EQUAL initializer
@@ -7515,7 +7515,7 @@ state 313
     $default  reduce using rule 111 (init_declarator_list)
 
 
-state 314
+State 314
 
   305 initializer: LEFT_BRACE . initializer_list RIGHT_BRACE
   306            | LEFT_BRACE . initializer_list COMMA RIGHT_BRACE
@@ -7689,21 +7689,21 @@ state 314
     initializer_list                      go to state 402
 
 
-state 315
+State 315
 
   304 initializer: assignment_expression .
 
     $default  reduce using rule 304 (initializer)
 
 
-state 316
+State 316
 
   118 single_declaration: fully_specified_type IDENTIFIER EQUAL initializer .
 
     $default  reduce using rule 118 (single_declaration)
 
 
-state 317
+State 317
 
   117 single_declaration: fully_specified_type IDENTIFIER array_specifier EQUAL . initializer
 
@@ -7875,9 +7875,9 @@ state 317
     initializer                           go to state 403
 
 
-state 318
+State 318
 
-   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE @1 . struct_declaration_list RIGHT_BRACE
+   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE $@1 . struct_declaration_list RIGHT_BRACE
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -8044,42 +8044,42 @@ state 318
     struct_declaration       go to state 276
 
 
-state 319
+State 319
 
    94 identifier_list: COMMA IDENTIFIER .
 
     $default  reduce using rule 94 (identifier_list)
 
 
-state 320
+State 320
 
    95 identifier_list: identifier_list COMMA . IDENTIFIER
 
     IDENTIFIER  shift, and go to state 405
 
 
-state 321
+State 321
 
    91 declaration: type_qualifier IDENTIFIER identifier_list SEMICOLON .
 
     $default  reduce using rule 91 (declaration)
 
 
-state 322
+State 322
 
    28 unary_expression: INC_OP unary_expression .
 
     $default  reduce using rule 28 (unary_expression)
 
 
-state 323
+State 323
 
    29 unary_expression: DEC_OP unary_expression .
 
     $default  reduce using rule 29 (unary_expression)
 
 
-state 324
+State 324
 
     8 primary_expression: LEFT_PAREN expression . RIGHT_PAREN
    81 expression: expression . COMMA assignment_expression
@@ -8088,21 +8088,21 @@ state 324
     COMMA        shift, and go to state 395
 
 
-state 325
+State 325
 
    13 postfix_expression: postfix_expression INC_OP .
 
     $default  reduce using rule 13 (postfix_expression)
 
 
-state 326
+State 326
 
    14 postfix_expression: postfix_expression DEC_OP .
 
     $default  reduce using rule 14 (postfix_expression)
 
 
-state 327
+State 327
 
    10 postfix_expression: postfix_expression LEFT_BRACKET . integer_expression RIGHT_BRACKET
 
@@ -8274,28 +8274,28 @@ state 327
     struct_specifier                      go to state 170
 
 
-state 328
+State 328
 
    12 postfix_expression: postfix_expression DOT . FIELD_SELECTION
 
     FIELD_SELECTION  shift, and go to state 409
 
 
-state 329
+State 329
 
    19 function_call_generic: function_call_header_no_parameters RIGHT_PAREN .
 
     $default  reduce using rule 19 (function_call_generic)
 
 
-state 330
+State 330
 
    18 function_call_generic: function_call_header_with_parameters RIGHT_PAREN .
 
     $default  reduce using rule 18 (function_call_generic)
 
 
-state 331
+State 331
 
    23 function_call_header_with_parameters: function_call_header_with_parameters COMMA . assignment_expression
 
@@ -8465,7 +8465,7 @@ state 331
     struct_specifier                      go to state 170
 
 
-state 332
+State 332
 
    20 function_call_header_no_parameters: function_call_header VOID .
   167 type_specifier_nonarray: VOID .
@@ -8474,28 +8474,28 @@ state 332
     $default     reduce using rule 167 (type_specifier_nonarray)
 
 
-state 333
+State 333
 
    22 function_call_header_with_parameters: function_call_header assignment_expression .
 
     $default  reduce using rule 22 (function_call_header_with_parameters)
 
 
-state 334
+State 334
 
    24 function_call_header: function_identifier LEFT_PAREN .
 
     $default  reduce using rule 24 (function_call_header)
 
 
-state 335
+State 335
 
    30 unary_expression: unary_operator unary_expression .
 
     $default  reduce using rule 30 (unary_expression)
 
 
-state 336
+State 336
 
    36 multiplicative_expression: multiplicative_expression STAR . unary_expression
 
@@ -8652,7 +8652,7 @@ state 336
     struct_specifier                      go to state 170
 
 
-state 337
+State 337
 
    37 multiplicative_expression: multiplicative_expression SLASH . unary_expression
 
@@ -8809,7 +8809,7 @@ state 337
     struct_specifier                      go to state 170
 
 
-state 338
+State 338
 
    38 multiplicative_expression: multiplicative_expression PERCENT . unary_expression
 
@@ -8966,7 +8966,7 @@ state 338
     struct_specifier                      go to state 170
 
 
-state 339
+State 339
 
    41 additive_expression: additive_expression DASH . multiplicative_expression
 
@@ -9124,7 +9124,7 @@ state 339
     struct_specifier                      go to state 170
 
 
-state 340
+State 340
 
    40 additive_expression: additive_expression PLUS . multiplicative_expression
 
@@ -9282,7 +9282,7 @@ state 340
     struct_specifier                      go to state 170
 
 
-state 341
+State 341
 
    43 shift_expression: shift_expression LEFT_OP . additive_expression
 
@@ -9441,7 +9441,7 @@ state 341
     struct_specifier                      go to state 170
 
 
-state 342
+State 342
 
    44 shift_expression: shift_expression RIGHT_OP . additive_expression
 
@@ -9600,7 +9600,7 @@ state 342
     struct_specifier                      go to state 170
 
 
-state 343
+State 343
 
    48 relational_expression: relational_expression LE_OP . shift_expression
 
@@ -9760,7 +9760,7 @@ state 343
     struct_specifier                      go to state 170
 
 
-state 344
+State 344
 
    49 relational_expression: relational_expression GE_OP . shift_expression
 
@@ -9920,7 +9920,7 @@ state 344
     struct_specifier                      go to state 170
 
 
-state 345
+State 345
 
    46 relational_expression: relational_expression LEFT_ANGLE . shift_expression
 
@@ -10080,7 +10080,7 @@ state 345
     struct_specifier                      go to state 170
 
 
-state 346
+State 346
 
    47 relational_expression: relational_expression RIGHT_ANGLE . shift_expression
 
@@ -10240,7 +10240,7 @@ state 346
     struct_specifier                      go to state 170
 
 
-state 347
+State 347
 
    51 equality_expression: equality_expression EQ_OP . relational_expression
 
@@ -10401,7 +10401,7 @@ state 347
     struct_specifier                      go to state 170
 
 
-state 348
+State 348
 
    52 equality_expression: equality_expression NE_OP . relational_expression
 
@@ -10562,7 +10562,7 @@ state 348
     struct_specifier                      go to state 170
 
 
-state 349
+State 349
 
    54 and_expression: and_expression AMPERSAND . equality_expression
 
@@ -10724,7 +10724,7 @@ state 349
     struct_specifier                      go to state 170
 
 
-state 350
+State 350
 
    56 exclusive_or_expression: exclusive_or_expression CARET . and_expression
 
@@ -10887,7 +10887,7 @@ state 350
     struct_specifier                      go to state 170
 
 
-state 351
+State 351
 
    58 inclusive_or_expression: inclusive_or_expression VERTICAL_BAR . exclusive_or_expression
 
@@ -11051,7 +11051,7 @@ state 351
     struct_specifier                      go to state 170
 
 
-state 352
+State 352
 
    60 logical_and_expression: logical_and_expression AND_OP . inclusive_or_expression
 
@@ -11216,7 +11216,7 @@ state 352
     struct_specifier                      go to state 170
 
 
-state 353
+State 353
 
    62 logical_xor_expression: logical_xor_expression XOR_OP . logical_and_expression
 
@@ -11382,7 +11382,7 @@ state 353
     struct_specifier                      go to state 170
 
 
-state 354
+State 354
 
    64 logical_or_expression: logical_or_expression OR_OP . logical_xor_expression
 
@@ -11549,7 +11549,7 @@ state 354
     struct_specifier                      go to state 170
 
 
-state 355
+State 355
 
    66 conditional_expression: logical_or_expression QUESTION . expression COLON assignment_expression
 
@@ -11720,51 +11720,51 @@ state 355
     struct_specifier                      go to state 170
 
 
-state 356
+State 356
 
   164 array_specifier: LEFT_BRACKET constant_expression RIGHT_BRACKET .
 
     $default  reduce using rule 164 (array_specifier)
 
 
-state 357
+State 357
 
   165 array_specifier: array_specifier LEFT_BRACKET RIGHT_BRACKET .
 
     $default  reduce using rule 165 (array_specifier)
 
 
-state 358
+State 358
 
   166 array_specifier: array_specifier LEFT_BRACKET constant_expression . RIGHT_BRACKET
 
     RIGHT_BRACKET  shift, and go to state 431
 
 
-state 359
+State 359
 
   160 type_name_list: type_name_list COMMA TYPE_NAME .
 
     $default  reduce using rule 160 (type_name_list)
 
 
-state 360
+State 360
 
   129 layout_qualifier_id: IDENTIFIER EQUAL constant_expression .
 
     $default  reduce using rule 129 (layout_qualifier_id)
 
 
-state 361
+State 361
 
   127 layout_qualifier_id_list: layout_qualifier_id_list COMMA layout_qualifier_id .
 
     $default  reduce using rule 127 (layout_qualifier_id_list)
 
 
-state 362
+State 362
 
-  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE @2 struct_declaration_list . RIGHT_BRACE
+  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE $@2 struct_declaration_list . RIGHT_BRACE
   297 struct_declaration_list: struct_declaration_list . struct_declaration
 
     ATTRIBUTE               shift, and go to state 1
@@ -11932,7 +11932,7 @@ state 362
     struct_declaration       go to state 368
 
 
-state 363
+State 363
 
   299 struct_declaration: type_qualifier type_specifier . struct_declarator_list SEMICOLON
 
@@ -11942,7 +11942,7 @@ state 363
     struct_declarator       go to state 366
 
 
-state 364
+State 364
 
   302 struct_declarator: IDENTIFIER .
   303                  | IDENTIFIER . array_specifier
@@ -11954,7 +11954,7 @@ state 364
     array_specifier  go to state 434
 
 
-state 365
+State 365
 
   298 struct_declaration: type_specifier struct_declarator_list . SEMICOLON
   301 struct_declarator_list: struct_declarator_list . COMMA struct_declarator
@@ -11963,44 +11963,44 @@ state 365
     SEMICOLON  shift, and go to state 436
 
 
-state 366
+State 366
 
   300 struct_declarator_list: struct_declarator .
 
     $default  reduce using rule 300 (struct_declarator_list)
 
 
-state 367
+State 367
 
-  295 struct_specifier: STRUCT LEFT_BRACE @3 struct_declaration_list RIGHT_BRACE .
+  295 struct_specifier: STRUCT LEFT_BRACE $@3 struct_declaration_list RIGHT_BRACE .
 
     $default  reduce using rule 295 (struct_specifier)
 
 
-state 368
+State 368
 
   297 struct_declaration_list: struct_declaration_list struct_declaration .
 
     $default  reduce using rule 297 (struct_declaration_list)
 
 
-state 369
+State 369
 
   358 jump_statement: BREAK SEMICOLON .
 
     $default  reduce using rule 358 (jump_statement)
 
 
-state 370
+State 370
 
   357 jump_statement: CONTINUE SEMICOLON .
 
     $default  reduce using rule 357 (jump_statement)
 
 
-state 371
+State 371
 
-  348 iteration_statement: DO @9 . statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
+  348 iteration_statement: DO $@9 . statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -12237,16 +12237,16 @@ state 371
     jump_statement                        go to state 310
 
 
-state 372
+State 372
 
-  350 iteration_statement: FOR LEFT_PAREN . @10 for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
+  350 iteration_statement: FOR LEFT_PAREN . $@10 for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
 
-    $default  reduce using rule 349 (@10)
+    $default  reduce using rule 349 ($@10)
 
-    @10  go to state 438
+    $@10  go to state 438
 
 
-state 373
+State 373
 
   334 selection_statement: IF LEFT_PAREN . expression RIGHT_PAREN selection_rest_statement
 
@@ -12417,21 +12417,21 @@ state 373
     struct_specifier                      go to state 170
 
 
-state 374
+State 374
 
   361 jump_statement: DISCARD SEMICOLON .
 
     $default  reduce using rule 361 (jump_statement)
 
 
-state 375
+State 375
 
   359 jump_statement: RETURN SEMICOLON .
 
     $default  reduce using rule 359 (jump_statement)
 
 
-state 376
+State 376
 
    81 expression: expression . COMMA assignment_expression
   360 jump_statement: RETURN expression . SEMICOLON
@@ -12440,9 +12440,9 @@ state 376
     SEMICOLON  shift, and go to state 440
 
 
-state 377
+State 377
 
-  340 switch_statement: SWITCH LEFT_PAREN . expression RIGHT_PAREN @7 LEFT_BRACE switch_statement_list RIGHT_BRACE
+  340 switch_statement: SWITCH LEFT_PAREN . expression RIGHT_PAREN $@7 LEFT_BRACE switch_statement_list RIGHT_BRACE
 
     BOOL                    shift, and go to state 4
     FLOAT                   shift, and go to state 5
@@ -12611,7 +12611,7 @@ state 377
     struct_specifier                      go to state 170
 
 
-state 378
+State 378
 
    81 expression: expression . COMMA assignment_expression
   343 case_label: CASE expression . COLON
@@ -12620,32 +12620,32 @@ state 378
     COLON  shift, and go to state 442
 
 
-state 379
+State 379
 
   344 case_label: DEFAULT COLON .
 
     $default  reduce using rule 344 (case_label)
 
 
-state 380
+State 380
 
-  346 iteration_statement: WHILE LEFT_PAREN . @8 condition RIGHT_PAREN statement_no_new_scope
+  346 iteration_statement: WHILE LEFT_PAREN . $@8 condition RIGHT_PAREN statement_no_new_scope
 
-    $default  reduce using rule 345 (@8)
+    $default  reduce using rule 345 ($@8)
 
-    @8  go to state 443
+    $@8  go to state 443
 
 
-state 381
+State 381
 
   319 compound_statement: LEFT_BRACE RIGHT_BRACE .
 
     $default  reduce using rule 319 (compound_statement)
 
 
-state 382
+State 382
 
-  322 compound_statement: LEFT_BRACE @4 . statement_list @5 RIGHT_BRACE
+  322 compound_statement: LEFT_BRACE $@4 . statement_list $@5 RIGHT_BRACE
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -12883,84 +12883,84 @@ state 382
     jump_statement                        go to state 310
 
 
-state 383
+State 383
 
    70 assignment_operator: MUL_ASSIGN .
 
     $default  reduce using rule 70 (assignment_operator)
 
 
-state 384
+State 384
 
    71 assignment_operator: DIV_ASSIGN .
 
     $default  reduce using rule 71 (assignment_operator)
 
 
-state 385
+State 385
 
    73 assignment_operator: ADD_ASSIGN .
 
     $default  reduce using rule 73 (assignment_operator)
 
 
-state 386
+State 386
 
    72 assignment_operator: MOD_ASSIGN .
 
     $default  reduce using rule 72 (assignment_operator)
 
 
-state 387
+State 387
 
    75 assignment_operator: LEFT_ASSIGN .
 
     $default  reduce using rule 75 (assignment_operator)
 
 
-state 388
+State 388
 
    76 assignment_operator: RIGHT_ASSIGN .
 
     $default  reduce using rule 76 (assignment_operator)
 
 
-state 389
+State 389
 
    77 assignment_operator: AND_ASSIGN .
 
     $default  reduce using rule 77 (assignment_operator)
 
 
-state 390
+State 390
 
    78 assignment_operator: XOR_ASSIGN .
 
     $default  reduce using rule 78 (assignment_operator)
 
 
-state 391
+State 391
 
    79 assignment_operator: OR_ASSIGN .
 
     $default  reduce using rule 79 (assignment_operator)
 
 
-state 392
+State 392
 
    74 assignment_operator: SUB_ASSIGN .
 
     $default  reduce using rule 74 (assignment_operator)
 
 
-state 393
+State 393
 
    69 assignment_operator: EQUAL .
 
     $default  reduce using rule 69 (assignment_operator)
 
 
-state 394
+State 394
 
    68 assignment_expression: unary_expression assignment_operator . assignment_expression
 
@@ -13130,7 +13130,7 @@ state 394
     struct_specifier                      go to state 170
 
 
-state 395
+State 395
 
    81 expression: expression COMMA . assignment_expression
 
@@ -13300,35 +13300,35 @@ state 395
     struct_specifier                      go to state 170
 
 
-state 396
+State 396
 
   333 expression_statement: expression SEMICOLON .
 
     $default  reduce using rule 333 (expression_statement)
 
 
-state 397
+State 397
 
   329 compound_statement_no_new_scope: LEFT_BRACE statement_list RIGHT_BRACE .
 
     $default  reduce using rule 329 (compound_statement_no_new_scope)
 
 
-state 398
+State 398
 
   331 statement_list: statement_list statement .
 
     $default  reduce using rule 331 (statement_list)
 
 
-state 399
+State 399
 
   113 init_declarator_list: init_declarator_list COMMA IDENTIFIER EQUAL initializer .
 
     $default  reduce using rule 113 (init_declarator_list)
 
 
-state 400
+State 400
 
   112 init_declarator_list: init_declarator_list COMMA IDENTIFIER array_specifier EQUAL . initializer
 
@@ -13500,14 +13500,14 @@ state 400
     initializer                           go to state 447
 
 
-state 401
+State 401
 
   307 initializer_list: initializer .
 
     $default  reduce using rule 307 (initializer_list)
 
 
-state 402
+State 402
 
   305 initializer: LEFT_BRACE initializer_list . RIGHT_BRACE
   306            | LEFT_BRACE initializer_list . COMMA RIGHT_BRACE
@@ -13517,16 +13517,16 @@ state 402
     COMMA        shift, and go to state 449
 
 
-state 403
+State 403
 
   117 single_declaration: fully_specified_type IDENTIFIER array_specifier EQUAL initializer .
 
     $default  reduce using rule 117 (single_declaration)
 
 
-state 404
+State 404
 
-   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE @1 struct_declaration_list . RIGHT_BRACE
+   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE $@1 struct_declaration_list . RIGHT_BRACE
   297 struct_declaration_list: struct_declaration_list . struct_declaration
 
     ATTRIBUTE               shift, and go to state 1
@@ -13694,28 +13694,28 @@ state 404
     struct_declaration       go to state 368
 
 
-state 405
+State 405
 
    95 identifier_list: identifier_list COMMA IDENTIFIER .
 
     $default  reduce using rule 95 (identifier_list)
 
 
-state 406
+State 406
 
     8 primary_expression: LEFT_PAREN expression RIGHT_PAREN .
 
     $default  reduce using rule 8 (primary_expression)
 
 
-state 407
+State 407
 
    10 postfix_expression: postfix_expression LEFT_BRACKET integer_expression . RIGHT_BRACKET
 
     RIGHT_BRACKET  shift, and go to state 451
 
 
-state 408
+State 408
 
    15 integer_expression: expression .
    81 expression: expression . COMMA assignment_expression
@@ -13725,42 +13725,42 @@ state 408
     $default  reduce using rule 15 (integer_expression)
 
 
-state 409
+State 409
 
    12 postfix_expression: postfix_expression DOT FIELD_SELECTION .
 
     $default  reduce using rule 12 (postfix_expression)
 
 
-state 410
+State 410
 
    23 function_call_header_with_parameters: function_call_header_with_parameters COMMA assignment_expression .
 
     $default  reduce using rule 23 (function_call_header_with_parameters)
 
 
-state 411
+State 411
 
    36 multiplicative_expression: multiplicative_expression STAR unary_expression .
 
     $default  reduce using rule 36 (multiplicative_expression)
 
 
-state 412
+State 412
 
    37 multiplicative_expression: multiplicative_expression SLASH unary_expression .
 
     $default  reduce using rule 37 (multiplicative_expression)
 
 
-state 413
+State 413
 
    38 multiplicative_expression: multiplicative_expression PERCENT unary_expression .
 
     $default  reduce using rule 38 (multiplicative_expression)
 
 
-state 414
+State 414
 
    36 multiplicative_expression: multiplicative_expression . STAR unary_expression
    37                          | multiplicative_expression . SLASH unary_expression
@@ -13774,7 +13774,7 @@ state 414
     $default  reduce using rule 41 (additive_expression)
 
 
-state 415
+State 415
 
    36 multiplicative_expression: multiplicative_expression . STAR unary_expression
    37                          | multiplicative_expression . SLASH unary_expression
@@ -13788,7 +13788,7 @@ state 415
     $default  reduce using rule 40 (additive_expression)
 
 
-state 416
+State 416
 
    40 additive_expression: additive_expression . PLUS multiplicative_expression
    41                    | additive_expression . DASH multiplicative_expression
@@ -13800,7 +13800,7 @@ state 416
     $default  reduce using rule 43 (shift_expression)
 
 
-state 417
+State 417
 
    40 additive_expression: additive_expression . PLUS multiplicative_expression
    41                    | additive_expression . DASH multiplicative_expression
@@ -13812,7 +13812,7 @@ state 417
     $default  reduce using rule 44 (shift_expression)
 
 
-state 418
+State 418
 
    43 shift_expression: shift_expression . LEFT_OP additive_expression
    44                 | shift_expression . RIGHT_OP additive_expression
@@ -13824,7 +13824,7 @@ state 418
     $default  reduce using rule 48 (relational_expression)
 
 
-state 419
+State 419
 
    43 shift_expression: shift_expression . LEFT_OP additive_expression
    44                 | shift_expression . RIGHT_OP additive_expression
@@ -13836,7 +13836,7 @@ state 419
     $default  reduce using rule 49 (relational_expression)
 
 
-state 420
+State 420
 
    43 shift_expression: shift_expression . LEFT_OP additive_expression
    44                 | shift_expression . RIGHT_OP additive_expression
@@ -13848,7 +13848,7 @@ state 420
     $default  reduce using rule 46 (relational_expression)
 
 
-state 421
+State 421
 
    43 shift_expression: shift_expression . LEFT_OP additive_expression
    44                 | shift_expression . RIGHT_OP additive_expression
@@ -13860,7 +13860,7 @@ state 421
     $default  reduce using rule 47 (relational_expression)
 
 
-state 422
+State 422
 
    46 relational_expression: relational_expression . LEFT_ANGLE shift_expression
    47                      | relational_expression . RIGHT_ANGLE shift_expression
@@ -13876,7 +13876,7 @@ state 422
     $default  reduce using rule 51 (equality_expression)
 
 
-state 423
+State 423
 
    46 relational_expression: relational_expression . LEFT_ANGLE shift_expression
    47                      | relational_expression . RIGHT_ANGLE shift_expression
@@ -13892,7 +13892,7 @@ state 423
     $default  reduce using rule 52 (equality_expression)
 
 
-state 424
+State 424
 
    51 equality_expression: equality_expression . EQ_OP relational_expression
    52                    | equality_expression . NE_OP relational_expression
@@ -13904,7 +13904,7 @@ state 424
     $default  reduce using rule 54 (and_expression)
 
 
-state 425
+State 425
 
    54 and_expression: and_expression . AMPERSAND equality_expression
    56 exclusive_or_expression: exclusive_or_expression CARET and_expression .
@@ -13914,7 +13914,7 @@ state 425
     $default  reduce using rule 56 (exclusive_or_expression)
 
 
-state 426
+State 426
 
    56 exclusive_or_expression: exclusive_or_expression . CARET and_expression
    58 inclusive_or_expression: inclusive_or_expression VERTICAL_BAR exclusive_or_expression .
@@ -13924,7 +13924,7 @@ state 426
     $default  reduce using rule 58 (inclusive_or_expression)
 
 
-state 427
+State 427
 
    58 inclusive_or_expression: inclusive_or_expression . VERTICAL_BAR exclusive_or_expression
    60 logical_and_expression: logical_and_expression AND_OP inclusive_or_expression .
@@ -13934,7 +13934,7 @@ state 427
     $default  reduce using rule 60 (logical_and_expression)
 
 
-state 428
+State 428
 
    60 logical_and_expression: logical_and_expression . AND_OP inclusive_or_expression
    62 logical_xor_expression: logical_xor_expression XOR_OP logical_and_expression .
@@ -13944,7 +13944,7 @@ state 428
     $default  reduce using rule 62 (logical_xor_expression)
 
 
-state 429
+State 429
 
    62 logical_xor_expression: logical_xor_expression . XOR_OP logical_and_expression
    64 logical_or_expression: logical_or_expression OR_OP logical_xor_expression .
@@ -13954,7 +13954,7 @@ state 429
     $default  reduce using rule 64 (logical_or_expression)
 
 
-state 430
+State 430
 
    66 conditional_expression: logical_or_expression QUESTION expression . COLON assignment_expression
    81 expression: expression . COMMA assignment_expression
@@ -13963,21 +13963,21 @@ state 430
     COLON  shift, and go to state 452
 
 
-state 431
+State 431
 
   166 array_specifier: array_specifier LEFT_BRACKET constant_expression RIGHT_BRACKET .
 
     $default  reduce using rule 166 (array_specifier)
 
 
-state 432
+State 432
 
-  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE @2 struct_declaration_list RIGHT_BRACE .
+  293 struct_specifier: STRUCT IDENTIFIER LEFT_BRACE $@2 struct_declaration_list RIGHT_BRACE .
 
     $default  reduce using rule 293 (struct_specifier)
 
 
-state 433
+State 433
 
   299 struct_declaration: type_qualifier type_specifier struct_declarator_list . SEMICOLON
   301 struct_declarator_list: struct_declarator_list . COMMA struct_declarator
@@ -13986,7 +13986,7 @@ state 433
     SEMICOLON  shift, and go to state 453
 
 
-state 434
+State 434
 
   165 array_specifier: array_specifier . LEFT_BRACKET RIGHT_BRACKET
   166                | array_specifier . LEFT_BRACKET constant_expression RIGHT_BRACKET
@@ -13997,7 +13997,7 @@ state 434
     $default  reduce using rule 303 (struct_declarator)
 
 
-state 435
+State 435
 
   301 struct_declarator_list: struct_declarator_list COMMA . struct_declarator
 
@@ -14006,23 +14006,23 @@ state 435
     struct_declarator  go to state 454
 
 
-state 436
+State 436
 
   298 struct_declaration: type_specifier struct_declarator_list SEMICOLON .
 
     $default  reduce using rule 298 (struct_declaration)
 
 
-state 437
+State 437
 
-  348 iteration_statement: DO @9 statement . WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
+  348 iteration_statement: DO $@9 statement . WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON
 
     WHILE  shift, and go to state 455
 
 
-state 438
+State 438
 
-  350 iteration_statement: FOR LEFT_PAREN @10 . for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
+  350 iteration_statement: FOR LEFT_PAREN $@10 . for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -14240,7 +14240,7 @@ state 438
     for_init_statement                    go to state 458
 
 
-state 439
+State 439
 
    81 expression: expression . COMMA assignment_expression
   334 selection_statement: IF LEFT_PAREN expression . RIGHT_PAREN selection_rest_statement
@@ -14249,32 +14249,32 @@ state 439
     COMMA        shift, and go to state 395
 
 
-state 440
+State 440
 
   360 jump_statement: RETURN expression SEMICOLON .
 
     $default  reduce using rule 360 (jump_statement)
 
 
-state 441
+State 441
 
    81 expression: expression . COMMA assignment_expression
-  340 switch_statement: SWITCH LEFT_PAREN expression . RIGHT_PAREN @7 LEFT_BRACE switch_statement_list RIGHT_BRACE
+  340 switch_statement: SWITCH LEFT_PAREN expression . RIGHT_PAREN $@7 LEFT_BRACE switch_statement_list RIGHT_BRACE
 
     RIGHT_PAREN  shift, and go to state 460
     COMMA        shift, and go to state 395
 
 
-state 442
+State 442
 
   343 case_label: CASE expression COLON .
 
     $default  reduce using rule 343 (case_label)
 
 
-state 443
+State 443
 
-  346 iteration_statement: WHILE LEFT_PAREN @8 . condition RIGHT_PAREN statement_no_new_scope
+  346 iteration_statement: WHILE LEFT_PAREN $@8 . condition RIGHT_PAREN statement_no_new_scope
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -14480,9 +14480,9 @@ state 443
     condition                             go to state 464
 
 
-state 444
+State 444
 
-  322 compound_statement: LEFT_BRACE @4 statement_list . @5 RIGHT_BRACE
+  322 compound_statement: LEFT_BRACE $@4 statement_list . $@5 RIGHT_BRACE
   331 statement_list: statement_list . statement
 
     ATTRIBUTE               shift, and go to state 1
@@ -14662,7 +14662,7 @@ state 444
     LOW_PRECISION           shift, and go to state 149
     PRECISION               shift, and go to state 150
 
-    $default  reduce using rule 321 (@5)
+    $default  reduce using rule 321 ($@5)
 
     variable_identifier                   go to state 240
     primary_expression                    go to state 241
@@ -14714,7 +14714,7 @@ state 444
     statement                             go to state 398
     simple_statement                      go to state 302
     compound_statement                    go to state 303
-    @5                                    go to state 465
+    $@5                                   go to state 465
     expression_statement                  go to state 305
     selection_statement                   go to state 306
     switch_statement                      go to state 307
@@ -14723,35 +14723,35 @@ state 444
     jump_statement                        go to state 310
 
 
-state 445
+State 445
 
    68 assignment_expression: unary_expression assignment_operator assignment_expression .
 
     $default  reduce using rule 68 (assignment_expression)
 
 
-state 446
+State 446
 
    81 expression: expression COMMA assignment_expression .
 
     $default  reduce using rule 81 (expression)
 
 
-state 447
+State 447
 
   112 init_declarator_list: init_declarator_list COMMA IDENTIFIER array_specifier EQUAL initializer .
 
     $default  reduce using rule 112 (init_declarator_list)
 
 
-state 448
+State 448
 
   305 initializer: LEFT_BRACE initializer_list RIGHT_BRACE .
 
     $default  reduce using rule 305 (initializer)
 
 
-state 449
+State 449
 
   306 initializer: LEFT_BRACE initializer_list COMMA . RIGHT_BRACE
   308 initializer_list: initializer_list COMMA . initializer
@@ -14925,21 +14925,21 @@ state 449
     initializer                           go to state 467
 
 
-state 450
+State 450
 
-   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE @1 struct_declaration_list RIGHT_BRACE .
+   93 block_structure: type_qualifier IDENTIFIER LEFT_BRACE $@1 struct_declaration_list RIGHT_BRACE .
 
     $default  reduce using rule 93 (block_structure)
 
 
-state 451
+State 451
 
    10 postfix_expression: postfix_expression LEFT_BRACKET integer_expression RIGHT_BRACKET .
 
     $default  reduce using rule 10 (postfix_expression)
 
 
-state 452
+State 452
 
    66 conditional_expression: logical_or_expression QUESTION expression COLON . assignment_expression
 
@@ -15109,44 +15109,44 @@ state 452
     struct_specifier                      go to state 170
 
 
-state 453
+State 453
 
   299 struct_declaration: type_qualifier type_specifier struct_declarator_list SEMICOLON .
 
     $default  reduce using rule 299 (struct_declaration)
 
 
-state 454
+State 454
 
   301 struct_declarator_list: struct_declarator_list COMMA struct_declarator .
 
     $default  reduce using rule 301 (struct_declarator_list)
 
 
-state 455
+State 455
 
-  348 iteration_statement: DO @9 statement WHILE . LEFT_PAREN expression RIGHT_PAREN SEMICOLON
+  348 iteration_statement: DO $@9 statement WHILE . LEFT_PAREN expression RIGHT_PAREN SEMICOLON
 
     LEFT_PAREN  shift, and go to state 469
 
 
-state 456
+State 456
 
   352 for_init_statement: declaration_statement .
 
     $default  reduce using rule 352 (for_init_statement)
 
 
-state 457
+State 457
 
   351 for_init_statement: expression_statement .
 
     $default  reduce using rule 351 (for_init_statement)
 
 
-state 458
+State 458
 
-  350 iteration_statement: FOR LEFT_PAREN @10 for_init_statement . for_rest_statement RIGHT_PAREN statement_no_new_scope
+  350 iteration_statement: FOR LEFT_PAREN $@10 for_init_statement . for_rest_statement RIGHT_PAREN statement_no_new_scope
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -15356,30 +15356,30 @@ state 458
     for_rest_statement                    go to state 472
 
 
-state 459
+State 459
 
   334 selection_statement: IF LEFT_PAREN expression RIGHT_PAREN . selection_rest_statement
 
     LEFT_BRACE  shift, and go to state 290
 
-    $default  reduce using rule 326 (@6)
+    $default  reduce using rule 326 ($@6)
 
     compound_statement        go to state 473
     statement_scoped          go to state 474
-    @6                        go to state 475
+    $@6                       go to state 475
     selection_rest_statement  go to state 476
 
 
-state 460
+State 460
 
-  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN . @7 LEFT_BRACE switch_statement_list RIGHT_BRACE
+  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN . $@7 LEFT_BRACE switch_statement_list RIGHT_BRACE
 
-    $default  reduce using rule 339 (@7)
+    $default  reduce using rule 339 ($@7)
 
-    @7  go to state 477
+    $@7  go to state 477
 
 
-state 461
+State 461
 
    81 expression: expression . COMMA assignment_expression
   337 condition: expression .
@@ -15389,14 +15389,14 @@ state 461
     $default  reduce using rule 337 (condition)
 
 
-state 462
+State 462
 
   338 condition: fully_specified_type . IDENTIFIER EQUAL initializer
 
     IDENTIFIER  shift, and go to state 478
 
 
-state 463
+State 463
 
   120 fully_specified_type: type_qualifier . type_specifier
   133 type_qualifier: type_qualifier . single_type_qualifier
@@ -15563,44 +15563,44 @@ state 463
     struct_specifier         go to state 170
 
 
-state 464
+State 464
 
-  346 iteration_statement: WHILE LEFT_PAREN @8 condition . RIGHT_PAREN statement_no_new_scope
+  346 iteration_statement: WHILE LEFT_PAREN $@8 condition . RIGHT_PAREN statement_no_new_scope
 
     RIGHT_PAREN  shift, and go to state 479
 
 
-state 465
+State 465
 
-  322 compound_statement: LEFT_BRACE @4 statement_list @5 . RIGHT_BRACE
+  322 compound_statement: LEFT_BRACE $@4 statement_list $@5 . RIGHT_BRACE
 
     RIGHT_BRACE  shift, and go to state 480
 
 
-state 466
+State 466
 
   306 initializer: LEFT_BRACE initializer_list COMMA RIGHT_BRACE .
 
     $default  reduce using rule 306 (initializer)
 
 
-state 467
+State 467
 
   308 initializer_list: initializer_list COMMA initializer .
 
     $default  reduce using rule 308 (initializer_list)
 
 
-state 468
+State 468
 
    66 conditional_expression: logical_or_expression QUESTION expression COLON assignment_expression .
 
     $default  reduce using rule 66 (conditional_expression)
 
 
-state 469
+State 469
 
-  348 iteration_statement: DO @9 statement WHILE LEFT_PAREN . expression RIGHT_PAREN SEMICOLON
+  348 iteration_statement: DO $@9 statement WHILE LEFT_PAREN . expression RIGHT_PAREN SEMICOLON
 
     BOOL                    shift, and go to state 4
     FLOAT                   shift, and go to state 5
@@ -15769,14 +15769,14 @@ state 469
     struct_specifier                      go to state 170
 
 
-state 470
+State 470
 
   353 conditionopt: condition .
 
     $default  reduce using rule 353 (conditionopt)
 
 
-state 471
+State 471
 
   355 for_rest_statement: conditionopt . SEMICOLON
   356                   | conditionopt . SEMICOLON expression
@@ -15784,21 +15784,21 @@ state 471
     SEMICOLON  shift, and go to state 482
 
 
-state 472
+State 472
 
-  350 iteration_statement: FOR LEFT_PAREN @10 for_init_statement for_rest_statement . RIGHT_PAREN statement_no_new_scope
+  350 iteration_statement: FOR LEFT_PAREN $@10 for_init_statement for_rest_statement . RIGHT_PAREN statement_no_new_scope
 
     RIGHT_PAREN  shift, and go to state 483
 
 
-state 473
+State 473
 
   325 statement_scoped: compound_statement .
 
     $default  reduce using rule 325 (statement_scoped)
 
 
-state 474
+State 474
 
   335 selection_rest_statement: statement_scoped . ELSE statement_scoped
   336                         | statement_scoped .
@@ -15809,9 +15809,9 @@ state 474
     $default  reduce using rule 336 (selection_rest_statement)
 
 
-state 475
+State 475
 
-  327 statement_scoped: @6 . simple_statement
+  327 statement_scoped: $@6 . simple_statement
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -16045,30 +16045,30 @@ state 475
     jump_statement                        go to state 310
 
 
-state 476
+State 476
 
   334 selection_statement: IF LEFT_PAREN expression RIGHT_PAREN selection_rest_statement .
 
     $default  reduce using rule 334 (selection_statement)
 
 
-state 477
+State 477
 
-  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN @7 . LEFT_BRACE switch_statement_list RIGHT_BRACE
+  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN $@7 . LEFT_BRACE switch_statement_list RIGHT_BRACE
 
     LEFT_BRACE  shift, and go to state 486
 
 
-state 478
+State 478
 
   338 condition: fully_specified_type IDENTIFIER . EQUAL initializer
 
     EQUAL  shift, and go to state 487
 
 
-state 479
+State 479
 
-  346 iteration_statement: WHILE LEFT_PAREN @8 condition RIGHT_PAREN . statement_no_new_scope
+  346 iteration_statement: WHILE LEFT_PAREN $@8 condition RIGHT_PAREN . statement_no_new_scope
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -16305,23 +16305,23 @@ state 479
     jump_statement                        go to state 310
 
 
-state 480
+State 480
 
-  322 compound_statement: LEFT_BRACE @4 statement_list @5 RIGHT_BRACE .
+  322 compound_statement: LEFT_BRACE $@4 statement_list $@5 RIGHT_BRACE .
 
     $default  reduce using rule 322 (compound_statement)
 
 
-state 481
+State 481
 
    81 expression: expression . COMMA assignment_expression
-  348 iteration_statement: DO @9 statement WHILE LEFT_PAREN expression . RIGHT_PAREN SEMICOLON
+  348 iteration_statement: DO $@9 statement WHILE LEFT_PAREN expression . RIGHT_PAREN SEMICOLON
 
     RIGHT_PAREN  shift, and go to state 491
     COMMA        shift, and go to state 395
 
 
-state 482
+State 482
 
   355 for_rest_statement: conditionopt SEMICOLON .
   356                   | conditionopt SEMICOLON . expression
@@ -16495,9 +16495,9 @@ state 482
     struct_specifier                      go to state 170
 
 
-state 483
+State 483
 
-  350 iteration_statement: FOR LEFT_PAREN @10 for_init_statement for_rest_statement RIGHT_PAREN . statement_no_new_scope
+  350 iteration_statement: FOR LEFT_PAREN $@10 for_init_statement for_rest_statement RIGHT_PAREN . statement_no_new_scope
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -16734,29 +16734,29 @@ state 483
     jump_statement                        go to state 310
 
 
-state 484
+State 484
 
   335 selection_rest_statement: statement_scoped ELSE . statement_scoped
 
     LEFT_BRACE  shift, and go to state 290
 
-    $default  reduce using rule 326 (@6)
+    $default  reduce using rule 326 ($@6)
 
     compound_statement  go to state 473
     statement_scoped    go to state 494
-    @6                  go to state 475
+    $@6                 go to state 475
 
 
-state 485
+State 485
 
-  327 statement_scoped: @6 simple_statement .
+  327 statement_scoped: $@6 simple_statement .
 
     $default  reduce using rule 327 (statement_scoped)
 
 
-state 486
+State 486
 
-  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN @7 LEFT_BRACE . switch_statement_list RIGHT_BRACE
+  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN $@7 LEFT_BRACE . switch_statement_list RIGHT_BRACE
 
     ATTRIBUTE               shift, and go to state 1
     VARYING                 shift, and go to state 2
@@ -16997,7 +16997,7 @@ state 486
     jump_statement                        go to state 310
 
 
-state 487
+State 487
 
   338 condition: fully_specified_type IDENTIFIER EQUAL . initializer
 
@@ -17169,35 +17169,35 @@ state 487
     initializer                           go to state 497
 
 
-state 488
+State 488
 
   324 statement_no_new_scope: simple_statement .
 
     $default  reduce using rule 324 (statement_no_new_scope)
 
 
-state 489
+State 489
 
-  346 iteration_statement: WHILE LEFT_PAREN @8 condition RIGHT_PAREN statement_no_new_scope .
+  346 iteration_statement: WHILE LEFT_PAREN $@8 condition RIGHT_PAREN statement_no_new_scope .
 
     $default  reduce using rule 346 (iteration_statement)
 
 
-state 490
+State 490
 
   323 statement_no_new_scope: compound_statement_no_new_scope .
 
     $default  reduce using rule 323 (statement_no_new_scope)
 
 
-state 491
+State 491
 
-  348 iteration_statement: DO @9 statement WHILE LEFT_PAREN expression RIGHT_PAREN . SEMICOLON
+  348 iteration_statement: DO $@9 statement WHILE LEFT_PAREN expression RIGHT_PAREN . SEMICOLON
 
     SEMICOLON  shift, and go to state 498
 
 
-state 492
+State 492
 
    81 expression: expression . COMMA assignment_expression
   356 for_rest_statement: conditionopt SEMICOLON expression .
@@ -17207,21 +17207,21 @@ state 492
     $default  reduce using rule 356 (for_rest_statement)
 
 
-state 493
+State 493
 
-  350 iteration_statement: FOR LEFT_PAREN @10 for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope .
+  350 iteration_statement: FOR LEFT_PAREN $@10 for_init_statement for_rest_statement RIGHT_PAREN statement_no_new_scope .
 
     $default  reduce using rule 350 (iteration_statement)
 
 
-state 494
+State 494
 
   335 selection_rest_statement: statement_scoped ELSE statement_scoped .
 
     $default  reduce using rule 335 (selection_rest_statement)
 
 
-state 495
+State 495
 
   331 statement_list: statement_list . statement
   342 switch_statement_list: statement_list .
@@ -17463,29 +17463,29 @@ state 495
     jump_statement                        go to state 310
 
 
-state 496
+State 496
 
-  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN @7 LEFT_BRACE switch_statement_list . RIGHT_BRACE
+  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN $@7 LEFT_BRACE switch_statement_list . RIGHT_BRACE
 
     RIGHT_BRACE  shift, and go to state 499
 
 
-state 497
+State 497
 
   338 condition: fully_specified_type IDENTIFIER EQUAL initializer .
 
     $default  reduce using rule 338 (condition)
 
 
-state 498
+State 498
 
-  348 iteration_statement: DO @9 statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON .
+  348 iteration_statement: DO $@9 statement WHILE LEFT_PAREN expression RIGHT_PAREN SEMICOLON .
 
     $default  reduce using rule 348 (iteration_statement)
 
 
-state 499
+State 499
 
-  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN @7 LEFT_BRACE switch_statement_list RIGHT_BRACE .
+  340 switch_statement: SWITCH LEFT_PAREN expression RIGHT_PAREN $@7 LEFT_BRACE switch_statement_list RIGHT_BRACE .
 
     $default  reduce using rule 340 (switch_statement)
